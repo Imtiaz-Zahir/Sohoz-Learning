@@ -1,12 +1,30 @@
 import React from 'react'
 
 export default function CourseInfo() {
+    const show = (m)=>{
+        if(document.getElementById("aboutCourse").classList[2]=="h-20"){
+            document.getElementById("aboutCourse").classList.remove("h-20");
+            m.target.innerHTML="- Show Less";
+        }else{
+            document.getElementById("aboutCourse").classList.add("h-20");
+            m.target.innerHTML="+ Show More";
+        }
+        
+    };
+    const expand = (m)=>{
+        if(m.target.classList[5]=="rotate-90"){
+            m.target.classList.remove("rotate-90");
+            m.target.parentElement.parentElement.classList.remove("h-14");
+        }else{
+            m.target.classList.add("rotate-90");
+            m.target.parentElement.parentElement.classList.add("h-14");
+        }
+    }
+
   return (
     <>
-        
         <h5 className="my-4 text-lg font-bold mx-1">About Course</h5>
-        <div id="aboutc" className="h-20 overflow-hidden transition-all">
-            {"<!-- about course or course detials wright heare -->"}
+        <div id="aboutCourse" className="overflow-hidden transition-all h-20">
             Are you new to PHP or need a refresher? Then this course will help you get all the fundamentals of
             Procedural PHP, Object Oriented PHP, MYSQLi and ending the course by building a CMS system similar
             to WordPress, Joomla or Drupal.
@@ -32,10 +50,7 @@ export default function CourseInfo() {
             you will be able to download to help you practice PHP. To top it off, we will build and awesome CMS
             like WordPress, Joomla or Drupal.
         </div>
-        <div className="hover:text-orange-500 text-lg my-8 flex cursor-pointer font-medium text-slate-500" id="show">
-            <i id="icon" className="uil uil-plus mx-2"></i>
-            <p>Show More</p>
-        </div>
+        <button onClick={show} className="hover:text-orange-500 text-lg my-8 flex font-medium text-slate-500">+ Show More</button>
         <h5 className="my-4 text-lg font-bold mx-1">What Will You Learn?</h5>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6 list-disc text-lg list-inside">
             <li>Understand the fundamentals of healthy dieting (calories, protein, carbs, fat, vitamins & minerals)</li>
@@ -46,12 +61,11 @@ export default function CourseInfo() {
             <li>Improve immunity and energy levels with the right vitamins and minerals</li>
         </ul>
         <h5 className="my-4 text-lg font-bold mx-1">Course Content</h5>
-        <div id="op" className="rounded-lg border border-slate-400 overflow-hidden my-4 h-14">
-            <div id="ro" className="flex border-b border-slate-400 justify-between items-center p-3 font-bold text-lg bg-slate-50 cursor-pointer hover:text-orange-500">
+        <div className="rounded-lg border border-slate-400 overflow-hidden my-4 h-14">
+            <div className="flex border-b border-slate-400 justify-between items-center p-3 font-bold text-lg bg-slate-50 cursor-pointer hover:text-orange-500">
                 <p>Setting up</p>
-                <i id="al" className="uil uil-angle-right text-orange-500 text-3xl leading-8"></i>
+                <i onClick={expand} className="uil uil-angle-up text-orange-500 text-3xl leading-8 rotate-90"></i>
             </div>
-            {"<!-- more -->"}
             <div className="flex justify-between items-center p-2 font-medium text-slate-500 hover:bg-slate-100 cursor-pointer">
                 <div className="flex">
                     <i className="uil uil-youtube mx-2"></i>
