@@ -4,7 +4,7 @@ import CourseContainer from './CourseContainer'
 export default function Courses() {
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20">
-        <h1 className="text-3xl md:text-5xl font-bold my-6 text-center pb-4">Our All Courses</h1>
+        <h1 className="text-3xl md:text-5xl font-bold my-6 text-center mb-4">Our All Courses</h1>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {<><CourseContainer/><CourseContainer/><CourseContainer/><CourseContainer/><CourseContainer/><CourseContainer/></>}
             <div className="w-full col-span-1 md:col-span-2 xl:col-span-3 flex justify-between items-center my-6">
