@@ -13,7 +13,8 @@ import Register from './components/Register';
 import Blog from './components/Blog';
 import Webinar from './components/Webinar';
 import Course from './components/Course';
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop';
+import Dashbord from './components/user/Dashbord';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/blog' element={<Blog/>}/>
         <Route path='/webinar' element={<Webinar/>}/>
         <Route path='/course' element={<Course/>}/>
+        <Route path='/user' element={<Dashbord/>}/>
       </Routes>
       <Footer/>
     </>
