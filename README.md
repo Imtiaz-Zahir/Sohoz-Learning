@@ -28,7 +28,7 @@ Sohoz Learning is an innovative online course selling website specifically desig
 
 To set up and run Sohoz Learning locally, follow these steps:
 
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `https://github.com/Imtiaz-Zahir/Sohoz-Learning.git`
 
 2. Install dependencies: `npm install`
 
