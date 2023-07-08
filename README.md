@@ -1,62 +1,34 @@
-# Sohoz Learning - Bangla Online Course Selling Website
-
-Sohoz Learning is an innovative online course selling website specifically designed for the Bangla-speaking audience. The platform aims to provide a comprehensive and accessible online learning experience, offering a wide range of educational courses in the Bengali language. This README.md provides an overview of the project, its features, and instructions for setting up and running the website.
-
-## Features
-
-1. **Course Marketplace**: Sohoz Learning serves as a marketplace for instructors to showcase and sell their courses, covering various subjects and topics.
-
-2. **Bengali Language Support**: The website is entirely in the Bengali language, ensuring a user-friendly experience for Bangla-speaking learners.
-
-3. **User-Friendly Interface**: Sohoz Learning boasts a clean and intuitive user interface, enabling seamless navigation and easy access to course details and purchasing options.
-
-4. **Secure Payment Integration**: The platform incorporates secure payment gateways, allowing users to make transactions for purchasing courses using credit/debit cards, mobile banking, or popular digital wallets.
-
-5. **Instructor Profiles**: Dedicated instructor profiles provide a platform for instructors to showcase their qualifications, expertise, and course offerings.
-
-6. **Course Reviews and Ratings**: Users can leave reviews and ratings for courses, facilitating an interactive learning community and assisting others in making informed decisions.
-
-7. **Learning Management System (LMS)**: Sohoz Learning features a robust LMS with video lectures, interactive quizzes, assignments, progress tracking, and completion certificates for a seamless learning experience.
-
-8. **Community Engagement**: The platform encourages community interaction through discussion forums, chat features, and peer-to-peer learning opportunities.
-
-9. **Responsive Design**: Sohoz Learning is designed to be fully responsive, ensuring compatibility across different devices, including desktops, laptops, tablets, and smartphones.
-
-10. **Admin Dashboard**: The project includes an intuitive admin dashboard for efficient management of courses, instructors, user accounts, payments, and other website operations.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-To set up and run Sohoz Learning locally, follow these steps:
+First, run the development server:
 
-1. Clone the repository: `https://github.com/Imtiaz-Zahir/Sohoz-Learning.git`
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-2. Install dependencies: `npm install`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-3. Configure the database connection in the `.env` file.
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-4. Run database migrations: `npm run migrate`
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-5. Start the server: `npm run dev`
+## Learn More
 
-6. Access the website in your browser: `http://localhost:5173`
+To learn more about Next.js, take a look at the following resources:
 
-## Contribution Guidelines
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Contributions to Sohoz Learning are welcome. If you wish to contribute, please follow these guidelines:
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-- Fork the repository and create a new branch for your contribution.
+## Deploy on Vercel
 
-- Ensure your code adheres to the project's coding standards and best practices.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- Submit a pull request describing the changes you have made.
-
-## License
-
-The Sohoz Learning project is licensed under the [MIT License](LICENSE). Feel free to modify and distribute the code, subject to the license terms.
-
-## Contact
-
-If you have any questions or feedback regarding Sohoz Learning, please contact us at [email protected]
-
-We appreciate your interest in the project and look forward to your valuable contributions!
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
