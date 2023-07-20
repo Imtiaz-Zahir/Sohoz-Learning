@@ -1,16 +1,20 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CourseContainerHome from "@/components/CourseContainerHome";
+import CourseContainerHome from "@/components/CourseContainer";
 import FAQ from "@/components/FAQ";
+import Review from "@/components/Review";
 import {
   UilUnlockAlt,
   UilBookOpen,
   UilPhoneVolume,
+  UilGraduationCap 
 } from "@iconscout/react-unicons";
-import { UisStar } from "@iconscout/react-unicons-solid";
 
-export default function Home() {
+export default async function Home() {
+  const data = await fetch("http://localhost/oursite/apis/course.php");
+  const courses = await data.json();
+
   return (
     <>
       <section className="w-full px-0 pt-12 mb-16 bag xs:px-2 sm:px-6 lg:px-20 lg:flex lg:justify-between lg:items-center lg:pt-20 lg:mb-24">
@@ -25,7 +29,7 @@ export default function Home() {
             & Start Learning
           </h1>
           <p className="font-semibold text-xl my-6">
-            I'm Highly Experienced In Web Programming. I'm Teaching Online For
+            I&apos;m Highly Experienced In Web Programming. I&apos;m Teaching Online For
             About 20+ Years. I Can Help You To Improve Your Skill.
           </p>
         </div>
@@ -63,11 +67,11 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-20 my-28 grid grid-cols-1 lg:grid-cols-2 gap-8 justify-between items-center">
-        <Image height={900} width={700}  className="rounded-3xl" src="/a2.jpg" alt="" />
+        <Image height={900} width={700} className="rounded-3xl" src="/a2.jpg" alt="" />
         <div className="text-center">
           <p className="text-orange-500 my-4 font-semibold">ABOUT ME</p>
           <h2 className="text-4xl font-bold my-4">
-            I'm Teaching Online For About 5+ Years On Programming
+            I&apos;m Teaching Online For About 5+ Years On Programming
           </h2>
           <p className="py-4">
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
@@ -142,16 +146,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold">Explore Popular Courses</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
-          {
-            <>
-              <CourseContainerHome />
-              <CourseContainerHome />
-              <CourseContainerHome />
-              <CourseContainerHome />
-              <CourseContainerHome />
-              <CourseContainerHome />
-            </>
-          }
+          {courses.map((data,index)=>{return <CourseContainerHome key={index} data={data}/>})}
         </div>
         <div className="flex justify-center items-center w-full mt-10">
           <Link href="./courses">
@@ -195,59 +190,8 @@ export default function Home() {
             sollicitudin laoreet viverra.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:w-7/12 lg:pr-12">
-          <div className="p-8 bg-white flex flex-col rounded-xl cha transition-all duration-500 items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" height="80px" viewBox="0 0 448 512"><path d="M448 296c0 66.3-53.7 120-120 120h-8c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H320c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v32 32 72zm-256 0c0 66.3-53.7 120-120 120H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v32 32 72z"/></svg>
-            <span className="text-orange-400 flex">
-              {
-                <>
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                </>
-              }
-            </span>
-            <p className="my-4">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              Phasellus hendrerit. aliquet nibh nec urna. In nisi neque, aliquet
-              vel, dapibus mattis.
-            </p>
-            <div className="flex items-center gap-6">
-              <Image height={80} width={80} className="rounded-full" src="/client-1.jpg" alt="" />
-              <div>
-                <p className="text-xl mb-2 font-medium">Kane William</p>
-                <p>Web Developer</p>
-              </div>
-            </div>
-          </div>
-          <div className="p-8 bg-white flex flex-col rounded-xl cha transition-all duration-500 items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" height="80px" viewBox="0 0 448 512"><path d="M448 296c0 66.3-53.7 120-120 120h-8c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H320c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v32 32 72zm-256 0c0 66.3-53.7 120-120 120H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h8c30.9 0 56-25.1 56-56v-8H64c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64h64c35.3 0 64 28.7 64 64v32 32 72z"/></svg>
-            <span className="text-orange-400 flex">
-              {
-                <>
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                  <UisStar />
-                </>
-              }
-            </span>
-            <p className="my-4">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              Phasellus hendrerit. aliquet nibh nec urna. In nisi neque, aliquet
-              vel, dapibus mattis.
-            </p>
-            <div className="flex items-center gap-6">
-            <Image height={80} width={80} className="rounded-full" src="/client-1.jpg" alt="" />
-              <div>
-                <p className="text-xl mb-2 font-medium">Kane William</p>
-                <p>Web Developer</p>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:w-7/12 justify-between">
+          <Review /><Review />
         </div>
       </section>
       <section className="w-full py-20 px-0 xs:px-2 sm:px-6 lg:px-20 my-20 grid grid-cols-1 lg:grid-cols-2 gap-12 bg-purple-50">
@@ -280,7 +224,7 @@ export default function Home() {
             Why Choose Us?
           </h3>
           <div className="flex items-center my-2">
-            <i className="fa-solid fa-user-tie text-orange-600 text-6xl my-4 mr-4"></i>
+            {<UilGraduationCap  size="60" color="#ea580c" className="m-4" />}
             <div>
               <h1 className="text-xl font-bold my-1">Highly Experienced</h1>
               <p className="text-lg">

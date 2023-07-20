@@ -2,19 +2,19 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { UilUser,UilAlignCenterAlt,UilTimes } from "@iconscout/react-unicons";
+import { UilUser,UilAlignCenterAlt,UilTimes,UilShoppingCart } from "@iconscout/react-unicons";
 
 const items = [{
   name: "Courses",
-  url: "/course"
+  url: "/courses"
 },
-{
-  name: "Webinars",
-  url: "/webinar"
-},
+// {
+//   name: "Webinars",
+//   url: "/webinars"
+// },
 {
   name: "Blogs",
-  url: "/blog"
+  url: "/blogs"
 },
 {
   name: "About Us",
@@ -48,7 +48,7 @@ export default function Navbar() {
   // })
 
   return (
-    <nav id="nav" className="flex w-full px-0 py-0 xs:py-1 sm:py-2 md:py-3 justify-between items-center fixed xs:px-2 sm:px-4 md:px-8 lg:px-12 xl:px-20 bg-white">
+    <nav id="nav" className="flex w-full px-0 py-0 xs:py-1 sm:py-2 md:py-3 justify-between items-center fixed xs:px-2 sm:px-4 md:px-8 lg:px-12 xl:px-20 bg-white scroll">
       <Link href="./"><img className="h-10" src="/logo.png" alt="Sohoz Leaning" /></Link>
       <div className="flex">
         <div className="lg:hidden my-2 md:my-1 flex gap-2">
@@ -60,8 +60,7 @@ export default function Navbar() {
             return (
                 <li key={index} className="mx-4 lg:font-bold hover:text-orange-600 font-medium text-center lg:text-start my-4 lg:my-0 border-b-2 border-black lg:border-0"><Link href={item.url}>{item.name}</Link></li>
             )})}
-          <Link href="./cart"><li className="mx-4 font-bold hover:text-orange-600 cursor-pointer text-2xl flex my-4 lg:my-0 justify-center lg:justify-start"><i
-            className="fa-solid fa-cart-shopping"></i>
+          <Link href="./cart"><li className="mx-4 font-bold hover:text-orange-600 cursor-pointer text-2xl flex my-4 lg:my-0 justify-center lg:justify-start">{<UilShoppingCart size="24"/>}
             <div className="h-5 w-5 bg-orange-500 rounded-full -ml-1 -mt-2 items-center justify-center text-sm text-white flex">5</div>
           </li></Link>
         </ul>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function page() {
+export default function Page() {
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20 flex justify-center">
         <div className="xs:p-4 sm:p-6 md:p-8 lg:p-12 lg:w-2/5 rounded-xl login-shadow">

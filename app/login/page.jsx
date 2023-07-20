@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function page() {
+export default function Page() {
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20 flex justify-center">
         <div className="xs:p-4 sm:p-6 md:p-8 lg:p-12 lg:w-2/5 rounded-xl login-shadow">
@@ -25,7 +25,7 @@ export default function page() {
                 <div className="w-full py-2 bg-orange-500 text-white rounded-md font-bold text-center text-lg uppercase">
                     sing in</div>
             </a>
-            <p className="text-center text-lg font-medium mt-6">Don't have an account?<Link
+            <p className="text-center text-lg font-medium mt-6">Don&apos;t have an account?<Link
                     className="mx-2 text-orange-500 hover:text-blue-800 transition-all " href="./register">Register
                     Now</Link></p>
         </div>

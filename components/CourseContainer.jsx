@@ -1,36 +1,49 @@
-import React from 'react'
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { UisStar, UisStarHalfAlt } from '@iconscout/react-unicons-solid';
+import { UilClockThree, UilUser, UilShoppingCart, UilStar } from '@iconscout/react-unicons';
 
-export default function CourseContainer() {
+const star = (rating) => {
+  const stars = [];
+  for (let index = 1; index <= 5; index++) {
+    if (index <= rating) {
+      stars.push(<UisStar key={index} />);
+    } else if (index - rating <= 0.5 ) {
+      stars.push(<UisStarHalfAlt key={index} />);
+    } else {
+      stars.push(<UilStar key={index} />);
+    }
+  }
+  return stars;
+};
+
+export default function CourseContainerHome({data,key}) {
   return (
-    <div className="rounded-xl overflow-hidden shadow-lg">
-                <Link href="/course"><img className="w-full" src="https://demo.omexer.com/main/wp-content/uploads/sites/3/2019/05/course-9.jpg"
-                    alt=""/></Link>
-                <div className="p-4">
-                    <div className="flex text-lg">
-                        <span className="text-orange-400">
-                            <i className="uis uis-star"></i><i className="uis uis-star"></i><i className="uis uis-star"></i>
-                            <i className="uis uis-star"></i><i className="uil uil-star"></i>
-                        </span>
-                        <h4 className="mx-4 font-semibold">4.00</h4>
-                        <p className="text-slate-600 font-medium">(11)</p>
-                    </div>
-                    <Link href="/course"><h1 className="font-bold text-xl my-3 hover:text-orange-500">Ultimate Photoshop Training: From Beginner</h1></Link>
-                    <div className="flex text-slate-600 font-medium">
-                        <p className="mr-4"><i className="uil uil-user"></i>56</p>
-                        <p><i className="uil uil-clock-three"></i>02h 20m</p>
-                    </div>
-                    <div className="flex items-center mt-4">
-                        <div className="rounded-full w-12 h-12 bg-orange-600 mr-4 text-white flex justify-center items-center text-xl font-semibold">A</div>
-                        <p className="text-slate-600 font-medium mr-1">By</p>
-                        <a className="text-xl font-semibold hover:text-orange-500" href="#">Amir</a>
-                    </div>
-                </div>
-                <hr/>
-                <div className="p-4 flex justify-between items-center">
-                    <p className="text-xl font-bold text-orange-500">$19.00</p>
-                    <div className="bg-slate-200 rounded-lg font-medium py-2 px-3 cursor-pointer hover:bg-orange-600 hover:text-white"><i className="fa-solid fa-cart-shopping"></i>Add to cart</div>
-                </div>
-            </div>
-  )
+    <div key={key} className="p-4 bg-cyan-50 rounded-xl max-w-[350px] mx-auto my-5">
+      <Image className="w-full rounded-xl" src={`/course/${data.img}`} alt={data.title} height={300} width={350}/>
+      <div className="px-4 mt-4">
+        <Link href={`/courses/${data.course_number}`} className="text-2xl hover:text-orange-500 transition-all font-bold">{data.title}</Link>
+        <div className="flex items-center justify-between my-4 text-lg">
+          <span className="text-orange-400 flex">
+            {star(data.ratings).map((data)=>{return data})}
+          </span>
+          <p className="text-slate-600 font-medium">({data.total_review} Reviews)</p>
+        </div>
+        <div className="flex items-center justify-between text-slate-600 mb-2">
+          <span className="flex items-center gap-1">
+            <UilClockThree size='20'/>{data.duration}
+          </span>
+          <p className="text-slate-600 font-medium flex gap-1 items-center">
+            <UilUser size='18' />{data.total_sold}
+          </p>
+        </div>
+        <hr />
+        <div className="flex justify-between items-center mt-2">
+          <p className="text-orange-500 text-2xl font-bold">৳ {data.price}</p>
+          <span className="bg-slate-200 rounded-lg font-semibold p-2 cursor-pointer hover:bg-orange-600 hover:text-white flex items-center transition-all"><UilShoppingCart size="16" />Add to cart</span>
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,9 +1,9 @@
 import './globals.css'
-import { Rajdhani } from 'next/font/google'
+// import { Rajdhani } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const rajdhani = Rajdhani({ subsets: ['latin'],weight: ['400','500','600','700'] })
+// const rajdhani = Rajdhani({ subsets: ['latin'],weight: ['400','500','600','700'] })
 
 export const metadata = {
   title: 'Sohoz Leaning | A online learning platform',
@@ -13,7 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={rajdhani.className}>
+      <body 
+      style={{ fontFamily:"sans-serif" }}
+      // className={rajdhani.className}
+      >
         <Navbar/>
         {children}
         <Footer/>

@@ -1,7 +1,34 @@
 import React from 'react'
 import WebinarPreview from '@/components/WebinarPreview'
 
-export default function page({params}) {
+const webinars = [
+    {
+    id:1,
+    image:"/webinar-img-2.jpg",
+    name:"Web Programming Career Guideline",
+    date:"12 May, 2021",
+    time:"10:00 PM",
+    description:"Donec nec justo eget felis facilisis. Aliquam porttitor mauris sit amet orci.",
+  },
+  {
+    id:2,
+    image:"/webinar-img-2.jpg",
+    name:"Web Programming Career Guideline",
+    date:"12 May, 2021",
+    time:"10:00 PM",
+    description:"Donec nec justo eget felis facilisis. Aliquam porttitor mauris sit amet orci.",
+  },
+  {
+    id:3,
+    image:"/webinar-img-2.jpg",
+    name:"Web Programming Career Guideline",
+    date:"12 May, 2021",
+    time:"10:00 PM",
+    description:"Donec nec justo eget felis facilisis. Aliquam porttitor mauris sit amet orci.",
+  },
+  ]
+
+export default function Page({params}) {
   return (
     <>
     
@@ -141,7 +168,7 @@ export default function page({params}) {
     </section>
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 my-20 grid grid-cols-1 lg:grid-cols-2 gap-10">
         <h2 className="my-4 text-4xl font-bold col-span-1 lg:col-span-2">Upcoming Webinars</h2>
-        {<><WebinarPreview/><WebinarPreview/><WebinarPreview/><WebinarPreview/></>}
+        {webinars.map((data,index) => {return <WebinarPreview key={index} data={data}/>})}
     </section>
     
     </>
