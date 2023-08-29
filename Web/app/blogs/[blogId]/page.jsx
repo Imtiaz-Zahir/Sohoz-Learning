@@ -7,7 +7,7 @@ export default async function Page({ params }) {
     const blog = await data.json();
     return (
         <div className="lg:w-2/3">
-            <Image className="w-full rounded-xl" height={370} width={750} src={`/blog/${blog.imgurlki}`} alt={blog.titletaki} />
+            <Image className="w-full rounded-xl" priority={true} height={370} width={750} src={`/blog/${blog.imgurlki}`} alt={blog.titletaki} />
             <div className="md:flex my-6 font-semibold">
                 <div className="flex flex-wrap gap-4">
                     <p className='flex items-center gap-1 whitespace-nowrap'><UilUser size="17" className="text-orange-500" />{blog.kpostkorche}</p>

@@ -8,6 +8,9 @@ export default async function Page({ params }) {
     const data2 = await fetch(`http://localhost/oursite/apis/learn.php?course=${params.courseId}`);
     const learn = await data2.json();
 
+    const res = await fetch(`http://localhost/oursite/apis/course-contant.php?course=${params.courseId}`);
+    const contant = await res.json();
+
     return (
         <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20 lg:flex lg:justify-between">
             <div className="lg:w-2/3">
@@ -25,7 +28,7 @@ export default async function Page({ params }) {
                     <li>{learn.attrack_point_thr}</li>
                 </ul>
             </div>
-            <CourseAside courseId={params.courseId} duration={course.duration} price={course.price} total_sold={course.total_sold} lesson={course.lesson} lastupdate={course.lastupdate} />
+            <CourseAside contant={contant} course={course} courseId={params.courseId} />
         </section>
     )
 }

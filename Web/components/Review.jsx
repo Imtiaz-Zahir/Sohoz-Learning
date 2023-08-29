@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Image from 'next/image';
 import { UisStar, UisStarHalfAlt } from '@iconscout/react-unicons-solid';
 import { UilStar } from '@iconscout/react-unicons';
 
@@ -26,8 +27,8 @@ export default function Review() {
             <p className="my-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. aliquet
                 nibh nec urna. In nisi neque, aliquet vel, dapibus mattis.</p>
             <div className="flex items-center gap-6">
-                <img className="rounded-full w-20"
-                    src="/client-1.jpg" alt="" />
+                <Image height={80} width={80} className="rounded-full"
+                    src="/client-1.jpg" alt="Kane William" />
                 <div>
                     <p className="text-xl mb-2 font-medium">Kane William</p>
                     <p>Web Developer</p>

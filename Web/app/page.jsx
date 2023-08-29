@@ -4,6 +4,8 @@ import Image from "next/image";
 import CourseContainerHome from "@/components/CourseContainer";
 import FAQ from "@/components/FAQ";
 import Review from "@/components/Review";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next"
 import {
   UilUnlockAlt,
   UilBookOpen,
@@ -12,9 +14,9 @@ import {
 } from "@iconscout/react-unicons";
 
 export default async function Home() {
+  const session = await getServerSession(authOptions);
   const data = await fetch("http://localhost/oursite/apis/course.php");
   const courses = await data.json();
-
   return (
     <>
       <section className="w-full px-0 pt-12 mb-16 bag xs:px-2 sm:px-6 lg:px-20 lg:flex lg:justify-between lg:items-center lg:pt-20 lg:mb-24">
@@ -23,10 +25,7 @@ export default async function Home() {
             START LEARNING FROM HOME
           </p>
           <h1 className="font-bold text-4xl lg:text-6xl my-2">
-            Connect With Adam
-          </h1>
-          <h1 className="font-bold text-4xl lg:text-6xl my-2">
-            & Start Learning
+            Connect With Adam & Start Learning
           </h1>
           <p className="font-semibold text-xl my-6">
             I&apos;m Highly Experienced In Web Programming. I&apos;m Teaching Online For
@@ -34,7 +33,7 @@ export default async function Home() {
           </p>
         </div>
         <div className="w-2/4 px-4 hidden lg:block">
-          <Image width={500} height={700} className="w-full" src="/single-instructor-1.png" alt="" />
+          <Image priority={true} width={500} height={700} className="w-full" src="/single-instructor-1.png" alt="" />
         </div>
       </section>
       <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-14 xl:px-20 my-20 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -105,48 +104,13 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* <section className="w-full py-20 p-0 xs:px-2 sm:px-6 lg:px-20 my-20 bg-cyan-50 text-center lg:text-start">
-        <h2 className="text-orange-600 mb-2 font-medium">CATEGORIES</h2>
-        <div className="lg:flex lg:justify-between lg:items-center">
-            <h1 className="text-4xl font-bold">Popular Categories</h1>
-            <Link href="./courses.html"><button
-                className="text-lg text-orange-600 border-2 rounded-3xl border-orange-600 px-10 py-4 font-semibold hover:bg-orange-600 hover:text-white hidden lg:block">BROWSE
-                ALL CATEGORIES</button></Link>
-        </div>
-        <div className="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-4">
-            <div className="flex flex-col justify-center items-center">
-                <Link href="./courses.html"><img className="w-full rounded-lg"
-                    src="https://demo.omexer.com/main/wp-content/uploads/sites/3/2021/04/cat-1.jpg" alt=""/></Link>
-                    <Link href="./courses.html"><p className="text-2xl font-bold my-4 hover:text-orange-500">Development</p></Link>
-                <p>4 Courses</p>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-                <Link href="./courses.html"><img className="w-full rounded-lg"
-                    src="https://demo.omexer.com/main/wp-content/uploads/sites/3/2021/04/cat-1.jpg" alt=""/></Link>
-                    <Link href="./courses.html"><p className="text-2xl font-bold my-4 hover:text-orange-500">Development</p></Link>
-                <p>4 Courses</p>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-                <Link href="./courses.html"><img className="w-full rounded-lg"
-                    src="https://demo.omexer.com/main/wp-content/uploads/sites/3/2021/04/cat-1.jpg" alt=""/></Link>
-                    <Link href="./courses.html"><p className="text-2xl font-bold my-4 hover:text-orange-500">Development</p></Link>
-                <p>4 Courses</p>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-                <Link href="./courses.html"><img className="w-full rounded-lg"
-                    src="https://demo.omexer.com/main/wp-content/uploads/sites/3/2021/04/cat-1.jpg" alt=""/></Link>
-                    <Link href="./courses.html"><p className="text-2xl font-bold my-4 hover:text-orange-500">Development</p></Link>
-                <p>4 Courses</p>
-            </div>
-        </div>
-    </section> */}
       <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-20 my-20">
         <div className="flex justify-center items-center flex-col mb-10 text-center">
           <p className="text-orange-600 font-medium mb-3">COURSES</p>
           <h2 className="text-2xl font-bold">Explore Popular Courses</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
-          {courses.map((data,index)=>{return <CourseContainerHome key={index} data={data}/>})}
+          {courses.map((data,index)=>{return <CourseContainerHome index={index} data={data} session={session}/>})}
         </div>
         <div className="flex justify-center items-center w-full mt-10">
           <Link href="./courses">
@@ -271,5 +235,5 @@ export default async function Home() {
       </section>
       <FAQ />
     </>
-  );
+  )
 }

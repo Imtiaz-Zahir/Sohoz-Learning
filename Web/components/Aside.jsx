@@ -14,7 +14,7 @@ export default async function Aside() {
                 {popular.map(({imgurlki,titletaki,posotid,date}, index) => {
                     return (
                         <div key={index} className="flex items-center my-2">
-                            <Image  className="h-20 w-24 rounded-md" height={96} width={96} src={`/blog/${imgurlki}`} alt={titletaki} />
+                            <Image priority={true} className="rounded-md object-cover" height={80} width={96} src={`/blog/${imgurlki}`} alt={titletaki} />
                             <div className="p-4">
                                 <Link href={`/blogs/${posotid}`} className="font-bold text-sm mb-3 hover:text-orange-500 transition-all">{titletaki}</Link>
                                 <p className="text-xs text-slate-500">{date}</p>
@@ -28,7 +28,7 @@ export default async function Aside() {
                 {old.map(({imgurlki,titletaki,posotid,date}, index) => {
                     return (
                         <div key={index} className="flex items-center my-2">
-                            <Image  className="h-20 w-24 rounded-md" height={96} width={96} src={`/blog/${imgurlki}`} alt={titletaki} />
+                            <Image className="rounded-md object-cover" height={80} width={96} src={`/blog/${imgurlki}`} alt={titletaki} />
                             <div className="p-4">
                                 <Link href={`/blogs/${posotid}`} className="font-bold text-sm mb-3 hover:text-orange-500 transition-all">{titletaki}</Link>
                                 <p className="text-xs text-slate-500">{date}</p>
