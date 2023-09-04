@@ -44,7 +44,7 @@ export default function CourseAside({courseId,contant,course}) {
             <p>{course.duration}</p>
             <span className='flex text-slate-600 items-center gap-2'><UilSync size="16" />Last Updated</span>
             <p>{course.lastupdate}</p>
-            <span className='flex text-slate-600 items-center gap-2'><UilBookOpen size="16" />Last Lessons</span>
+            <span className='flex text-slate-600 items-center gap-2'><UilBookOpen size="16" />Total Lessons</span>
             <p>{course.lesson} Lessons</p>
         </div>
     </div>

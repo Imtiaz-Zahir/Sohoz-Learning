@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id          String        @id @default(uuid())
+  name        String
+  email       String        @unique
+  password    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  enrollments enrollments[]
+  reviews     reviews[]
+}
+
+model blogs {
+  id        String   @id @default(uuid())
+  image     String
+  author    String
+  title     String
+  content   String
+  views     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model courses {
+  id             String           @id @default(uuid())
+  price          Int
+  title          String
+  about          String
+  lavel          String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  learningPoient learningPoient[]
+  enrollments    enrollments[]
+  reviews        reviews[]
+}
+
+model learningPoient {
+  id        String   @id @default(uuid())
+  point     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  for       courses  @relation(fields: [coursesId], references: [id])
+  coursesId String
+}
+
+model enrollments {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  coures    courses  @relation(fields: [coursesId], references: [id])
+  user      users    @relation(fields: [usersId], references: [id])
+  usersId   String
+  coursesId String
+}
+
+model reviews {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rating    Int
+  comment   String
+  user      users    @relation(fields: [usersId], references: [id])
+  usersId   String
+  coures    courses  @relation(fields: [coursesId], references: [id])
+  coursesId String
+}
+
+model contacts {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

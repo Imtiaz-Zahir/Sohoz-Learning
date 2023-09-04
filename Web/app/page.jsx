@@ -17,6 +17,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   const data = await fetch("http://localhost/oursite/apis/course.php");
   const courses = await data.json();
+
   return (
     <>
       <section className="w-full px-0 pt-12 mb-16 bag xs:px-2 sm:px-6 lg:px-20 lg:flex lg:justify-between lg:items-center lg:pt-20 lg:mb-24">
