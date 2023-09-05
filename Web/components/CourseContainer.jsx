@@ -7,8 +7,13 @@ import { UisStar, UisStarHalfAlt } from '@iconscout/react-unicons-solid';
 import { UilClockThree, UilUser, UilShoppingCart, UilStar } from '@iconscout/react-unicons';
 import { cartContext } from '@/app/context';
 
-const star = (rating) => {
+const star = (reviews) => {
   const stars = [];
+  let sum=0;
+  for (let i = 0; i < reviews.length; i++) {
+    sum += reviews[i].rating;
+  }
+  const rating = sum / reviews.length;
   for (let index = 1; index <= 5; index++) {
     if (index <= rating) {
       stars.push(<UisStar key={index} />);
@@ -21,22 +26,22 @@ const star = (rating) => {
   return stars;
 };
 
-export default function CourseContainerHome({ data, index, session }) {
-  
+export default function CourseContainerHome({ data, session }) {
+
   const { setCartItem } = useContext(cartContext);
 
   const [inCart, setInCart] = useState()
 
   useEffect(() => {
     const cartCourse = JSON.parse(sessionStorage.getItem("cartCours"));
-    const inses = cartCourse === null ? -1 : cartCourse.findIndex(Object => { return Object.id === data.course_number }); setInCart(inses >= 0)
+    const inses = cartCourse === null ? -1 : cartCourse.findIndex(Object => { return Object.id === data.id }); setInCart(inses >= 0)
   }, [])
   const router = useRouter();
 
 const addCart = async () => {
   const myobj = {
-    id: data.course_number,
-    img: data.img,
+    id: data.id,
+    img: data.image,
     title: data.title,
     price: data.price
   };
@@ -50,23 +55,24 @@ const addCart = async () => {
   setCartItem(myArrayFromStorage.length);
   await router.push('/cart');
 }
+
   return (
-    <div key={index} className="p-4 bg-cyan-50 rounded-xl max-w-[350px] mx-auto my-5">
-      <Image className="w-full rounded-xl" src={`/course/${data.img}`} alt={data.title} height={300} width={350} />
+    <div key={data.id} className="p-4 bg-cyan-50 rounded-xl max-w-[350px] mx-auto my-5">
+      <Image className="w-full rounded-xl" src={`/course/${data.image}`} alt={data.title} height={300} width={350} />
       <div className="px-4 mt-4">
-        <Link href={`/courses/${data.course_number}`} className="text-2xl hover:text-orange-500 transition-all font-bold">{data.title}</Link>
+        <Link href={`/courses/${data.id}`} className="text-2xl hover:text-orange-500 transition-all font-bold">{data.title}</Link>
         <div className="flex items-center justify-between my-4 text-lg">
           <span className="text-orange-400 flex">
-            {star(data.ratings).map((data) => { return data })}
+            {star(data.reviews).map((data) => { return data })}
           </span>
-          <p className="text-slate-600 font-medium">({data.total_review} Reviews)</p>
+          <p className="text-slate-600 font-medium">({data.reviews.length} Reviews)</p>
         </div>
         <div className="flex items-center justify-between text-slate-600 mb-2">
           <span className="flex items-center gap-1">
             <UilClockThree size='20' />{data.duration}
           </span>
           <p className="text-slate-600 font-medium flex gap-1 items-center">
-            <UilUser size='18' />{data.total_sold}
+            <UilUser size='18' />{data.enrollments.length}
           </p>
         </div>
         <hr />

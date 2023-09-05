@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation'
 import { UilSignal, UilGraduationCap, UilClock, UilSync, UilBookOpen } from '@iconscout/react-unicons';
 import Link from 'next/link';
 
-export default function CourseAside({courseId,contant,course}) {
+export default function CourseAside({course}) {
     const [inCart,setInCart]=useState()
   useEffect(()=>{const cartCourse = JSON.parse(sessionStorage.getItem("cartCours"));
-  const inses = cartCourse===null?-1:cartCourse.findIndex(Object => { return Object.id === courseId });setInCart(inses>=0)},[])
+  const inses = cartCourse===null?-1:cartCourse.findIndex(Object => { return Object.id === course.id });setInCart(inses>=0)},[])
   const router = useRouter();
   return (
-    <aside className="lg:w[30%] max-w-[320px] mx-auto">
+    <aside className="lg:w[30%] max-w-[320px] ml-auto">
     <div className="rounded-xl overflow-hidden w-full shadow-xl">
         <iframe className="w-full" src="https://www.youtube.com/embed/yGDwk4z9EEg" frameborder="0"></iframe>
         <div className="p-4">
@@ -19,8 +19,8 @@ export default function CourseAside({courseId,contant,course}) {
             <h4 onClick={
             async() => {
               const myobj = {
-                id: courseId,
-                img: course.img,
+                id: course.id,
+                img: course.image,
                 title: course.title,
                 price: course.price
               };
@@ -37,23 +37,23 @@ export default function CourseAside({courseId,contant,course}) {
         <hr />
         <div className="p-4 grid grid-cols-2 font-medium gap-y-2">
             <span className='flex text-slate-600 items-center gap-2'><UilSignal size="16" />Level</span>
-            <p>All Levels</p>
+            <p>{course.lavel}</p>
             <span className='flex text-slate-600 items-center gap-2'><UilGraduationCap size="16" />Total</span>
-            <p>{course.total_sold} Enrolled</p>
+            <p>{course.enrollments.length} Enrolled</p>
             <span className='flex text-slate-600 items-center gap-2'><UilClock size="16" />Duration</span>
             <p>{course.duration}</p>
             <span className='flex text-slate-600 items-center gap-2'><UilSync size="16" />Last Updated</span>
-            <p>{course.lastupdate}</p>
+            <p>{course.updatedAt.toString().slice(4,15)}</p>
             <span className='flex text-slate-600 items-center gap-2'><UilBookOpen size="16" />Total Lessons</span>
             <p>{course.lesson} Lessons</p>
         </div>
     </div>
-    <div className="rounded-xl overflow-hidden w-full shadow-xl p-6 my-2">
+    {/* <div className="rounded-xl overflow-hidden w-full shadow-xl p-6 my-2">
         <h5 className="my-4 text-xl font-bold mx-1">Course Content</h5>
         <ul className="list-disc text-lg w-full pl-8">
             {contant.map((data,index) => {return <li className='my-2' key={index}>{data}</li>})}
         </ul>
-    </div>
+    </div> */}
 </aside>
   )
 }

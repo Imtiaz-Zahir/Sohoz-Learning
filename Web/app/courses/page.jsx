@@ -1,19 +1,41 @@
 import React from 'react'
-import CourseContainerHome from '@/components/CourseContainer'
+import CourseContainer from '@/components/CourseContainer'
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '../api/auth/[...nextauth]/route'
 import { UilAngleRight, UilAngleLeft } from '@iconscout/react-unicons'
+import { PrismaClient } from '@prisma/client'
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  const data = await fetch("http://localhost/oursite/apis/course.php");
-  const courses = await data.json();
+  
+  const prisma = new PrismaClient();
+  const courses = await prisma.courses.findMany({
+    take:5,
+    select:{
+      id:true,
+      title:true,
+      price:true,
+      image:true,
+      reviews:{
+        select:{
+          rating:true
+        }
+      },
+      enrollments:{
+        select:{
+          id:true
+        }
+      }
+    }
+  })
+  await prisma.$disconnect();
 
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20">
       <h1 className="text-3xl md:text-5xl font-bold my-6 text-center mb-4">Our All Courses</h1>
       <div className="w-full flex flex-wrap">
-        {courses.map((data,index) => { return <CourseContainerHome index={index} data={data} session={session}/> })}
+        {courses.map((data) => <CourseContainer data={data} session={session}/> )}
+
         {/* <div className="w-full flex justify-between items-center my-6">
           <p className="font-medium">Page <span>2</span> of <span>2</span></p>
           <div className="flex">

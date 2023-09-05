@@ -10,6 +10,7 @@ export default function Page() {
     const fetchBlogs=async()=>{
       const data = await fetch("/api/blogs");
       setBlogs(await data.json());
+      await prisma.$disconnect();
     }
     fetchBlogs();
   },[])

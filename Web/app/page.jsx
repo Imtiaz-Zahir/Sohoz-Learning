@@ -111,7 +111,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold">Explore Popular Courses</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
-          {courses.map((data,index)=>{return <CourseContainerHome index={index} data={data} session={session}/>})}
+          {/* {courses.map((data,index)=>{return <CourseContainerHome index={index} data={data} session={session}/>})} */}
         </div>
         <div className="flex justify-center items-center w-full mt-10">
           <Link href="./courses">

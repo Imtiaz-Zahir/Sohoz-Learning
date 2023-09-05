@@ -34,6 +34,7 @@ model blogs {
 
 model courses {
   id             String           @id @default(uuid())
+  image          String
   price          Int
   title          String
   about          String

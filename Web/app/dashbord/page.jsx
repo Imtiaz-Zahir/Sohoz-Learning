@@ -22,7 +22,7 @@ import {
 const sideManu = [
   { manu: "Dashboard", icon: <UilDashboard size="20" /> },
   { manu: "My Profile", icon: <UilUser size="20" /> },
-  { manu: "Enrolled Courses", icon: <UilGraduationCap size="20" /> },
+  // { manu: "Enrolled Courses", icon: <UilGraduationCap size="20" /> },
   { manu: "Reviews", icon: <UilStar size="20" /> },
   { manu: "My Quiz", icon: <UilShield size="20" /> },
   { manu: "Question & Answer", icon: <UilQuestion size="20" /> },
@@ -44,9 +44,9 @@ export default function Page() {
       case "My Profile":
         setMain(<Profile user={user.user}/>);
         break;
-      case "Enrolled Courses":
-        setMain(<Enrolled/>);
-        break;
+      // case "Enrolled Courses":
+      //   setMain(<Enrolled/>);
+      //   break;
       case "Reviews":
         setMain(<Reviews/>);
         break;
@@ -57,7 +57,7 @@ export default function Page() {
         setMain(<QNA />);
         break;
       default:
-        setMain(<Overview/>);
+        setMain(<Overview />);
     }
   };
  const {data:user} = useSession()

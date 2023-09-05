@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import querystring from 'querystring';
+import { PrismaClient } from '@prisma/client'
 import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions = {
@@ -22,24 +23,63 @@ export const authOptions = {
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch("http://localhost/oursite/apis/loginapi.php", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: querystring.stringify({uname:credentials.username,pass:credentials.password}),
-        })
-        const user = await res.json()
 
-        // If no error and we have user data, return it
-        if (typeof user.name==="string") {
+        // const res = await fetch("http://localhost/oursite/apis/loginapi.php", {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/x-www-form-urlencoded',
+        //   },
+        //   body: querystring.stringify({uname:credentials.username,pass:credentials.password}),
+        // })
+        // const user = await res.json()
+
+        const prisma = new PrismaClient();
+        try {
+          const user = await prisma.users.findUnique({
+            where: {
+              email:credentials.username,
+              password:credentials.password
+            },
+            select:{
+              id:true,
+              name:true,
+              email:true
+            }
+          })
           return user
-        }else{return null}
-        // Return null if user data could not be retrieved
-        // return null
+        } catch (error) {
+          console.log(error);
+          return null
+        }finally{
+          await prisma.$disconnect()
+        }
       }
     })
   ],
+  callbacks:{
+    async session({ session }) {
+      const prisma = new PrismaClient();
+        try {
+          const {id} = await prisma.users.findUnique({
+            where: {
+              email:session.user.email
+            },
+            select:{
+              id:true
+            }
+          })
+          session.user.id = id;
+
+          return session
+
+        } catch (error) {
+          console.log(error);
+          return null
+        }finally{
+          await prisma.$disconnect()
+        }
+    }
+  },
   // pages: {
   //   signIn: '/logins',
   // }
