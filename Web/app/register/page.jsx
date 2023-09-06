@@ -1,5 +1,4 @@
 'use client'
-import querystring from 'querystring';
 import React, { useState } from "react";
 import Link from "next/link";
 import { signIn } from 'next-auth/react'
@@ -9,12 +8,9 @@ export default function Page() {
 
   const hendelSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost/oursite/apis/register.php", {
+    const res = await fetch("/api/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: querystring.stringify({
+      body: JSON.stringify({
         name: e.target.elements.name.value,
         email: e.target.elements.email.value,
         pass: e.target.elements.pass.value,
@@ -22,7 +18,7 @@ export default function Page() {
       }),
     });
     const user = await res.json();
-    user.message==="User registered successfully"?signIn():setErr(user.message);
+    res.status===201?signIn():setErr(user.mass);
   };
 
   return (

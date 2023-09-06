@@ -1,22 +1,39 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CourseContainerHome from "@/components/CourseContainer";
+import CourseContainer from "@/components/CourseContainer";
 import FAQ from "@/components/FAQ";
 import Review from "@/components/Review";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth/next"
 import {
   UilUnlockAlt,
   UilBookOpen,
   UilPhoneVolume,
   UilGraduationCap 
 } from "@iconscout/react-unicons";
+import { PrismaClient } from '@prisma/client'
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
-  const data = await fetch("http://localhost/oursite/apis/course.php");
-  const courses = await data.json();
+  const prisma = new PrismaClient();
+  const courses = await prisma.courses.findMany({
+    take:6,
+    select:{
+      id:true,
+      title:true,
+      price:true,
+      image:true,
+      reviews:{
+        select:{
+          rating:true
+        }
+      },
+      enrollments:{
+        select:{
+          id:true
+        }
+      }
+    }
+  })
+  await prisma.$disconnect();
 
   return (
     <>
@@ -111,7 +128,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold">Explore Popular Courses</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
-          {/* {courses.map((data,index)=>{return <CourseContainerHome index={index} data={data} session={session}/>})} */}
+          {courses.map((data)=>{return <CourseContainer data={data}/>})}
         </div>
         <div className="flex justify-center items-center w-full mt-10">
           <Link href="./courses">

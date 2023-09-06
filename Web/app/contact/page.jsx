@@ -1,6 +1,5 @@
 'use client'
 import React, { useState } from 'react'
-import querystring from 'querystring';
 import { UilEnvelopeAlt, UilPhoneVolume, UilLocationPinAlt } from '@iconscout/react-unicons'
 
 export default function Page() {
@@ -8,13 +7,10 @@ export default function Page() {
     const contact = async (m) => {
         setName("Sending...");
         await m.preventDefault();
-        const res = await fetch('http://localhost/oursite/apis/contact.php',
+        const res = await fetch('/api/contact',
             {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: querystring.stringify({
+                body: JSON.stringify({
                     name: m.target.name.value,
                     email: m.target.email.value,
                     sub: m.target.sub.value,
@@ -22,15 +18,19 @@ export default function Page() {
                 }),
 
             })
+            console.log(res);
         const data = await res.json();
-        if (data.code === 200) {
-             alert("Message Sent");
-             m.target.reset();
-            setName("Submit");
-        } else {
-            alert("Message Not Sent");
-            setName("Submit");
-        }
+        alert(data.msg);
+        res.status===201?m.target.reset():null;
+        setName("Submit");
+        // if (data.status === 200) {
+        //      alert("Message Sent");
+        //      m.target.reset();
+        //     setName("Submit");
+        // } else {
+        //     alert("Message Not Sent");
+        //     setName("Submit");
+        // }
 
     }
     return (

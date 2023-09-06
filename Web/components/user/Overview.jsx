@@ -10,7 +10,6 @@ import Image from "next/image";
 export default async function Overview() {
   const res = await fetch("/api/deshbord");
   const courses = await res.json();
-  console.log(courses);
 
   return (
     <div className="py-6 lg:p-6 lg:w-[80%] w-full">

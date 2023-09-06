@@ -11,7 +11,7 @@ export async function middleware(request) {
     if(!token)return NextResponse.redirect(new URL('/', request.url))
   }
   if(request.nextUrl.pathname.startsWith('/login')||request.nextUrl.pathname.startsWith('/api/auth/signin')||request.nextUrl.pathname.startsWith('/register')){
-    if(token)return NextResponse.redirect(new URL('/', request.url))
+    if(token)return NextResponse.redirect(new URL('/dashbord', request.url))
   }
   // return NextResponse.redirect(new URL('/', request.url))
 }

@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import querystring from 'querystring';
 import { PrismaClient } from '@prisma/client'
 import CredentialsProvider from "next-auth/providers/credentials"
+import { SHA256 } from "crypto-js";
 
 export const authOptions = {
   providers: [
@@ -38,7 +39,7 @@ export const authOptions = {
           const user = await prisma.users.findUnique({
             where: {
               email:credentials.username,
-              password:credentials.password
+              password:await SHA256(credentials.password).toString()
             },
             select:{
               id:true,
@@ -80,9 +81,9 @@ export const authOptions = {
         }
     }
   },
-  // pages: {
-  //   signIn: '/logins',
-  // }
+  pages: {
+    signIn: '/login',
+  }
 }
 
 const handler = NextAuth(authOptions)

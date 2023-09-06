@@ -44,6 +44,7 @@ model courses {
   learningPoient learningPoient[]
   enrollments    enrollments[]
   reviews        reviews[]
+  couresContent  couresContent[]
 }
 
 model learningPoient {
@@ -55,6 +56,27 @@ model learningPoient {
   coursesId String
 }
 
+model couresContent {
+  id        String    @id @default(uuid())
+  title     String
+  for       courses   @relation(fields: [coursesId], references: [id])
+  coursesId String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  lessons   lessons[]
+}
+
+model lessons {
+  id              String        @id @default(uuid())
+  title           String
+  video           String
+  duration        String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  for             couresContent @relation(fields: [couresContentId], references: [id])
+  couresContentId String
+}
+
 model enrollments {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -63,18 +85,21 @@ model enrollments {
   user      users    @relation(fields: [usersId], references: [id])
   usersId   String
   coursesId String
+  reviews   reviews  @relation(fields: [reviewsId], references: [id])
+  reviewsId String
 }
 
 model reviews {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  rating    Int
-  comment   String
-  user      users    @relation(fields: [usersId], references: [id])
-  usersId   String
-  coures    courses  @relation(fields: [coursesId], references: [id])
-  coursesId String
+  id          String        @id @default(uuid())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  rating      Int
+  comment     String
+  user        users         @relation(fields: [usersId], references: [id])
+  usersId     String
+  coures      courses       @relation(fields: [coursesId], references: [id])
+  coursesId   String
+  enrollments enrollments[]
 }
 
 model contacts {

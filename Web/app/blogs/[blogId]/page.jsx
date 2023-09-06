@@ -8,6 +8,7 @@ export default async function Page({ params }) {
     const blog=await prisma.blogs.findFirst({
         where:{id:params.blogId}
     })
+    await prisma.$disconnect();
     
     return (
         <div className="lg:w-2/3">

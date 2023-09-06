@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Overview from "@/components/user/Overview";
 import Profile from "@/components/user/Profile";
-import Enrolled from "@/components/user/Enrolled";
+// import Enrolled from "@/components/user/Enrolled";
 import Reviews from "@/components/user/Reviews";
 import Quiz from "@/components/user/Quiz";
 import QNA from "@/components/user/QNA";
@@ -13,7 +13,7 @@ import { signOut } from 'next-auth/react'
 import {
   UilDashboard,
   UilUser,
-  UilGraduationCap,
+  // UilGraduationCap,
   UilStar,
   UilShield,
   UilQuestion,
