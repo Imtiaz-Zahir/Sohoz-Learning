@@ -7,9 +7,9 @@ export default function Page() {
     return (
         <>
             <section className="px-0 xs:px-2 sm:px-6 lg:px-32 py-20 grid grid-cols-1 justify-center gap-6 lg:grid-cols-3">
-                <Image className="rounded-2xl mt-28 hidden lg:block" height={410} width={330} src="/about-img-1.jpg" alt="image-1" />
-                <Image className="rounded-2xl w-full" height={410} width={330} src="/img-lg-2.jpg" alt="image-2" />
-                <Image className="rounded-2xl mt-28 hidden lg:block" height={410} width={330} src="/about-img-3.jpg" alt="image-3" />
+                <Image className="rounded-2xl mt-28 hidden lg:block mr-auto" height={410} width={330} src="/about-img-1.jpg" alt="image-1" />
+                <Image className="rounded-2xl w-full mx-auto" height={410} width={330} src="/img-lg-2.jpg" alt="image-2" />
+                <Image className="rounded-2xl mt-28 hidden lg:block ml-auto" height={410} width={330} src="/about-img-3.jpg" alt="image-3" />
             </section>
             <section className="px-0 xs:px-2 sm:px-6 lg:px-20 my-12 lg:flex lg:justify-center">
                 <div className="text-center mb-10 lg:w-3/4">

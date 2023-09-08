@@ -17,23 +17,6 @@ export async function GET(req){
     }
 }
 
-//POST Example
-// {
-//     "price":5000,
-//     "image":"course-9.jpg",
-//     "title":"Java for noone",
-//     "about":"nothing to say",
-//     "lavel":"beganer",
-//     "learningPoient":[
-//         {"point":"somthing1"},
-//         {"point":"somthing2"},
-//         {"point":"somthing3"},
-//         {"point":"somthing4"},
-//         {"point":"somthing5"},
-//         {"point":"somthing6"}
-//     ]
-// }
-
 export async function POST(req){
     const{price,image,title,about,lavel,learningPoient}=await req.json();
     try {

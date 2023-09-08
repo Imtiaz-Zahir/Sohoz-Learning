@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { signIn } from 'next-auth/react'
+import { signIn } from "next-auth/react";
+import { UilEye, UilEyeSlash } from "@iconscout/react-unicons";
 
 export default function Page() {
-  const [err,setErr]=useState(null)
+  const [err, setErr] = useState(null);
+  const [show, setShow] = useState(false);
 
   const hendelSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function Page() {
       }),
     });
     const user = await res.json();
-    res.status===201?signIn():setErr(user.mass);
+    res.status === 201 ? signIn() : setErr(user.mass);
   };
 
   return (
@@ -54,13 +56,28 @@ export default function Page() {
             <label className="my-2 text-xl font-semibold" htmlFor="pass">
               Password :
             </label>
-            <input
-              className="w-full border border-slate-400 h-14 p-2 my-2 rounded-md"
-              type="password"
-              name="pass"
-              placeholder="Password"
-              required
-            />
+            <div className="flex items-center relative">
+              <input
+                className="w-full border border-slate-400 h-14 p-2 my-2 rounded-md"
+                type={show ? "text" : "password"}
+                name="pass"
+                placeholder="Password"
+                required
+              />
+              {show ? (
+                <UilEyeSlash
+                  size="20"
+                  className="text-slate-400 cursor-pointer absolute right-4"
+                  onClick={() => setShow((prv) => !prv)}
+                />
+              ) : (
+                <UilEye
+                  size="20"
+                  className="text-slate-400 cursor-pointer absolute right-4"
+                  onClick={() => setShow((prv) => !prv)}
+                />
+              )}
+            </div>
           </div>
           <div className="my-4">
             <label
@@ -69,13 +86,28 @@ export default function Page() {
             >
               Confirm Password :
             </label>
-            <input
-              className="w-full border border-slate-400 h-14 p-2 my-2 rounded-md"
-              type="password"
-              name="password_confirm"
-              placeholder="Confirm Password"
-              required
-            />
+            <div className="flex items-center relative">
+              <input
+                className="w-full border border-slate-400 h-14 p-2 my-2 rounded-md"
+                type={show ? "text" : "password"}
+                name="password_confirm"
+                placeholder="Confirm Password"
+                required
+              />
+              {show ? (
+                <UilEyeSlash
+                  size="20"
+                  className="text-slate-400 cursor-pointer absolute right-4"
+                  onClick={() => setShow((prv) => !prv)}
+                />
+              ) : (
+                <UilEye
+                  size="20"
+                  className="text-slate-400 cursor-pointer absolute right-4"
+                  onClick={() => setShow((prv) => !prv)}
+                />
+              )}
+            </div>
           </div>
           <div className="my-4 flex justify-between items-center">
             <button
@@ -95,7 +127,7 @@ export default function Page() {
             </p>
           </div>
         </form>
-        <p className='text-red-600 text-lg font-bold'>{err}</p>
+        <p className="text-red-600 text-lg font-bold">{err}</p>
       </div>
     </section>
   );

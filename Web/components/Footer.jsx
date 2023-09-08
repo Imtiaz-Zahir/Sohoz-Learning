@@ -57,7 +57,7 @@ export default async function Footer() {
         </div>
         <div className="w-full rounded-xl px-6">
           <h3 className="text-2xl my-4 font-bold">Popular Posts</h3>
-          <div className="flex items-center my-2">
+          {blog?<div className="flex items-center my-2">
             <Image
               className="h-20 w-24 rounded-md"
               height={80}
@@ -76,7 +76,7 @@ export default async function Footer() {
                 {blog.createdAt.toString().slice(4, 15)}
               </p>
             </div>
-          </div>
+          </div>:<p className="text-slate-500">No Blog Found</p>}
         </div>
         <div className="w-full font-bold px-6">
           <h3 className="text-2xl my-4">Contact Us</h3>

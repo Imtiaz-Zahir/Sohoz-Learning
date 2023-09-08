@@ -37,6 +37,7 @@ model courses {
   image          String
   price          Int
   title          String
+  video          String
   about          String
   lavel          String
   createdAt      DateTime         @default(now())
@@ -58,6 +59,7 @@ model learningPoient {
 
 model couresContent {
   id        String    @id @default(uuid())
+  orderOn   Int
   title     String
   for       courses   @relation(fields: [coursesId], references: [id])
   coursesId String
@@ -71,6 +73,7 @@ model lessons {
   title           String
   video           String
   duration        String
+  orderOn         Int
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
   for             couresContent @relation(fields: [couresContentId], references: [id])
@@ -78,15 +81,18 @@ model lessons {
 }
 
 model enrollments {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  coures    courses  @relation(fields: [coursesId], references: [id])
-  user      users    @relation(fields: [usersId], references: [id])
-  usersId   String
-  coursesId String
-  reviews   reviews  @relation(fields: [reviewsId], references: [id])
-  reviewsId String
+  id            String   @id @default(uuid())
+  price         Int
+  paymentMethod String
+  trxId         String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  coures        courses  @relation(fields: [coursesId], references: [id])
+  user          users    @relation(fields: [usersId], references: [id])
+  usersId       String
+  coursesId     String
+  reviews       reviews  @relation(fields: [reviewsId], references: [id])
+  reviewsId     String
 }
 
 model reviews {

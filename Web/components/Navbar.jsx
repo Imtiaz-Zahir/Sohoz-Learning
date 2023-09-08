@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, signOut } from 'next-auth/react'
@@ -31,6 +31,12 @@ const items = [{
 
 export default function Navbar({session}) {
 
+  useEffect(()=>{
+    window.addEventListener("scroll", () => {
+      document.getElementById("nav").classList.toggle("scroll", window.scrollY > 0)
+    })
+  },[])
+
   const clickHandler = () => {
     if (document.getElementById("ul").classList[13] == "hidden") {
       document.getElementById("ul").classList.remove("hidden");
@@ -48,9 +54,7 @@ export default function Navbar({session}) {
   }
   const [icon, seticon] = useState(<UilAlignCenterAlt onClick={clickHandler} size="40" color="#ea580c" id="bar" className="border border-orange-500 md:p-3 p-2 rounded-md cursor-pointer" />)
 
-  window.addEventListener("scroll", () => {
-    document.getElementById("nav").classList.toggle("scroll", window.scrollY > 0)
-  })
+  
 
   return (
     <nav id="nav" className="flex w-full px-0 py-0 xs:py-1 sm:py-2 md:py-3 justify-between items-center fixed xs:px-2 sm:px-4 md:px-8 lg:px-12 xl:px-20 bg-white">

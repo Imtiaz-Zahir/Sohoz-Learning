@@ -10,10 +10,10 @@ export async function POST(req){
                 coursesId
             }
         })
-        return new Response('success',{status:201})
+        return new Response(JSON.stringify({msg:'success'}),{status:201})
     } catch (error) {
         console.log(error);
-        return new Response('failed',{status:501})
+        return new Response(JSON.stringify({msg:'failed'}),{status:501})
     }finally{
         await prisma.$disconnect()
     }

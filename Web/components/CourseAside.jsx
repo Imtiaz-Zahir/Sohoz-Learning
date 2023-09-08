@@ -13,18 +13,23 @@ export default function CourseAside({ course }) {
   const router = useRouter();
 
   return (
-    <aside className="lg:w[30%] max-w-[320px] ml-auto">
+    <aside className="lg:w-2/5 max-w-[320px] ml-auto">
       <div className="rounded-xl overflow-hidden w-full shadow-xl">
-        <iframe
+        {course.video && <iframe
           className="w-full"
-          src="https://www.youtube.com/embed/yGDwk4z9EEg"
+          src={course.video}
           frameborder="0"
-        ></iframe>
+        ></iframe>}
         <div className="p-4">
           <p className="text-3xl my-2 font-bold">৳ {course.price}</p>
           <h4
             onClick={() => {
-              sessionStorage.setItem("course", JSON.stringify(course));
+              sessionStorage.setItem("course", JSON.stringify({
+                id:course.id,
+                title:course.title,
+                price:course.price,
+                image:course.image
+              }));
               router.push("/checkout");
             }}
             className="cursor-pointer w-full text-center py-3 bg-orange-500 text-xl font-bold rounded-lg text-white my-4"
@@ -38,27 +43,27 @@ export default function CourseAside({ course }) {
             <UilSignal size="16" />
             Level
           </span>
-          <p>{course.lavel}</p>
+          <p className="text-right">{course.lavel}</p>
           <span className="flex text-slate-600 items-center gap-2">
             <UilGraduationCap size="16" />
             Total
           </span>
-          <p>{course.enrollments.length} Enrolled</p>
+          <p className="text-right">{course.enrollments.length} Enrolled</p>
           <span className="flex text-slate-600 items-center gap-2">
             <UilClock size="16" />
             Duration
           </span>
-          <p>{course.duration}</p>
+          <p className="text-right">{course.duration}</p>
           <span className="flex text-slate-600 items-center gap-2">
             <UilSync size="16" />
             Last Updated
           </span>
-          <p>{course.updatedAt.toString().slice(4, 15)}</p>
+          <p className="text-right">{course.updatedAt.toString().slice(4, 15)}</p>
           <span className="flex text-slate-600 items-center gap-2">
             <UilBookOpen size="16" />
             Total Lessons
           </span>
-          <p>{course.lesson} Lessons</p>
+          <p className="text-right">{course.lesson} Lessons</p>
         </div>
       </div>
       <div className="rounded-xl overflow-hidden w-full shadow-xl p-6 my-2">

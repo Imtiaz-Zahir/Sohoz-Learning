@@ -30,12 +30,12 @@ const coursecon = [
   },
 ];
 
-export default function page() {
+export default function Page() {
   const [url, setUrl] = useState("https://www.youtube.com/embed/XHOmBV4js_E");
   const totleLesson = coursecon.reduce((acc, crr) => {
     return acc + crr.video.length;
   }, 0);
-  const progress=1;
+  const progress = 1;
 
   return (
     <>
@@ -45,7 +45,8 @@ export default function page() {
         </p>
         <p>
           Your Progress: <span class="font-bold">{progress} </span>of
-          <span class="font-bold"> {totleLesson}</span> ({(progress/totleLesson*100).toFixed(2)}%)
+          <span class="font-bold"> {totleLesson}</span> (
+          {((progress / totleLesson) * 100).toFixed(2)}%)
         </p>
         <p class="mb-3 flex items-center justify-center gap-2">
           <UilCheckCircle />
@@ -55,44 +56,7 @@ export default function page() {
       <section class="px-0 xs:px-2 sm:px-6 lg:px-20 my-8 lg:flex lg:justify-between">
         <aside class="lg:w-[30%] w-full">
           <h5 class="my-4 text-lg font-bold mx-1">Course Content</h5>
-          {coursecon.map((contant) => {
-            const [open, setOpen] = useState(false);
-
-            return (
-              <div class="rounded-lg border border-slate-400 overflow-hidden my-4">
-                <div
-                  onClick={() => setOpen((pre) => !pre)}
-                  class="flex justify-between items-center p-3 font-bold text-lg bg-slate-50 transition-all cursor-pointer hover:text-orange-500"
-                >
-                  <p>{contant.title}</p>
-                  <UilAngleDown
-                    size="24"
-                    color="#ea580c"
-                    className={`cursor-pointer ${open ? "rotate-180" : null}`}
-                  />
-                </div>
-                {open &&
-                  contant.video.map((lesson) => {
-                    return (
-                      <div
-                        onClick={() => {
-                          setUrl(lesson.url);
-                        }}
-                        class="flex justify-between items-center p-2 border-t border-slate-400 font-medium text-slate-500 hover:bg-slate-100 cursor-pointer"
-                      >
-                        <p className="flex justify-center items-center gap-2">
-                          <UilYoutube />
-                          <span>{lesson.title}</span>
-                        </p>
-                        <p className="flex justify-center items-center gap-2">
-                          <span>{lesson.duration}</span> <UilPadlock />
-                        </p>
-                      </div>
-                    );
-                  })}
-              </div>
-            );
-          })}
+          {coursecon.map((contant,index) => CourseContent(contant, setUrl, index))}
         </aside>
         <div class="lg:w-2/3">
           <iframe
@@ -116,6 +80,42 @@ export default function page() {
   );
 }
 
-function courseContent(contant, setUrl) {
-  
+function CourseContent(contant, setUrl, index) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div key={index} class="rounded-lg border border-slate-400 overflow-hidden my-4">
+      <div
+        onClick={() => setOpen((pre) => !pre)}
+        class="flex justify-between items-center p-3 font-bold text-lg bg-slate-50 transition-all cursor-pointer hover:text-orange-500"
+      >
+        <p>{contant.title}</p>
+        <UilAngleDown
+          size="24"
+          color="#ea580c"
+          className={`cursor-pointer ${open ? "rotate-180" : null}`}
+        />
+      </div>
+      {open &&
+        contant.video.map((lesson, index) => {
+          return (
+            <div
+            key={index}
+              onClick={() => {
+                setUrl(lesson.url);
+              }}
+              class="flex justify-between items-center p-2 border-t border-slate-400 font-medium text-slate-500 hover:bg-slate-100 cursor-pointer"
+            >
+              <p className="flex justify-center items-center gap-2">
+                <UilYoutube />
+                <span>{lesson.title}</span>
+              </p>
+              <p className="flex justify-center items-center gap-2">
+                <span>{lesson.duration}</span> <UilPadlock />
+              </p>
+            </div>
+          );
+        })}
+    </div>
+  );
 }

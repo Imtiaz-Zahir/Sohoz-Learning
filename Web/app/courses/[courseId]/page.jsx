@@ -44,12 +44,12 @@ export default async function Page({ params }) {
         <div className="pl-4">{course.about}</div>
         <h3 className="my-4 text-lg font-bold mx-1">What Will You Learn?</h3>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-x-10 list-disc text-lg ml-8">
-          {course.learningPoient.map((data) => (
-            <li className="my-2">{data.point}</li>
+          {course.learningPoient.map((data,index) => (
+            <li key={index} className="my-2">{data.point}</li>
           ))}
         </ul>
       </div>
-      <CourseAside course={course} />
+      <CourseAside course={course}/>
     </section>
   );
 }

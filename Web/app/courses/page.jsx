@@ -29,8 +29,8 @@ export default async function Page() {
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20">
       <h1 className="text-3xl md:text-5xl font-bold my-6 text-center mb-4">Our All Courses</h1>
-      <div className="w-full flex flex-wrap">
-        {courses.map((data) => <CourseContainer data={data}/> )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
+        {courses.map((data) => <CourseContainer data={data} key={data.id}/> )}
 
         {/* <div className="w-full flex justify-between items-center my-6">
           <p className="font-medium">Page <span>2</span> of <span>2</span></p>

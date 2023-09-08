@@ -30,12 +30,12 @@ const star = (reviews) => {
   return stars;
 };
 
-export default function CourseContainerHome({ data }) {
+export default function CourseContainerHome({ data, key }) {
   const router = useRouter();
 
   return (
     <div
-      key={data.id}
+      key={key}
       className="p-4 bg-cyan-50 rounded-xl max-w-[350px] mx-auto my-5"
     >
       <Image
@@ -77,7 +77,12 @@ export default function CourseContainerHome({ data }) {
           <p className="text-orange-500 text-2xl font-bold">৳ {data.price}</p>
           <span
             onClick={() => {
-              sessionStorage.setItem("course", JSON.stringify(data));
+              sessionStorage.setItem("course", JSON.stringify({
+                id:data.id,
+                title:data.title,
+                price:data.price,
+                image:data.image
+              }));
               router.push("/checkout");
             }}
             className="bg-slate-200 rounded-lg font-semibold p-2 cursor-pointer hover:bg-orange-600 hover:text-white flex items-center transition-all"

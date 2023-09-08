@@ -2,16 +2,19 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { UilEye, UilEyeSlash } from "@iconscout/react-unicons";
 
 export default function Page() {
   const [err, setErr] = useState(false);
+  const [show, setShow] = useState(false);
+  
   const hendelSubmit = async (e) => {
     e.preventDefault();
     const res = await signIn("credentials", {
       username: e.target.elements.uname.value,
       password: e.target.elements.pass.value,
       redirect: false,
-      callbackUrl: "/",
+      callbackUrl:"/dashbord"
     });
     res.error ? setErr(true) : location.reload();
   };
@@ -33,13 +36,28 @@ export default function Page() {
             placeholder="Email Address"
             required
           />
+          <div className="flex items-center relative">
           <input
             className="w-full border border-slate-400 h-12 p-2 mt-2 rounded-md"
-            type="password"
+            type={show ? "text" : "password"}
             name="pass"
             placeholder="Password"
             required
           />
+          {show ? (
+            <UilEyeSlash
+              size="20"
+              className="text-slate-400 cursor-pointer absolute right-4"
+              onClick={() => setShow((prv) => !prv)}
+            />
+          ) : (
+            <UilEye
+              size="20"
+              className="text-slate-400 cursor-pointer absolute right-4"
+              onClick={() => setShow((prv) => !prv)}
+            />
+          )}
+          </div>
           <div className="flex justify-between text-lg my-8">
             <div>
               <input type="checkbox" name="keep" />

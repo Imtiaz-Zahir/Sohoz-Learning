@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React,{useState} from "react";
 import Image from "next/image";
 import { UilAngleDown } from "@iconscout/react-unicons";
 
@@ -38,7 +38,7 @@ export default function faq() {
       <div className="text-center">
         <h2 className="text-orange-600 font-medium my-2">POPULAR QUESTIONS</h2>
         <h3 className="text-4xl font-bold mb-6">Frequently Asked Questions</h3>
-        {faqs.map((data, index) => faqItem(data, index))}
+        {faqs.map((data, index) => FaqItem(data, index))}
       </div>
       <Image
         className="w-full rounded-3xl"
@@ -51,15 +51,15 @@ export default function faq() {
   );
 }
 
-function faqItem(data, index) {
-    const [open,setOpen] = React.useState(false);
+function FaqItem(data, index) {
+    const [open,setOpen] = useState(false);
 
   return (
     <div
       key={index}
-      className={`px-6 py-4 my-3 transition-all overflow-hidden bg-white rounded-xl duration-500 faq ${open?null:'h-16'}`}
+      className={`px-6 py-4 my-3 transition-all overflow-hidden bg-white rounded-xl duration-500 faq`}
     >
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">{data.question}</h1>
         <UilAngleDown
           onClick={()=>setOpen(pre=>!pre)}
@@ -68,7 +68,7 @@ function faqItem(data, index) {
           className={`cursor-pointer ${open?'rotate-180':null}`}
         />
       </div>
-      <p className="text-lg">{data.answer}</p>
+      {open?<p className="text-lg mt-6">{data.answer}</p>:null}
     </div>
   );
 }
