@@ -30,7 +30,7 @@ export async function POST(req) {
         JSON.stringify({ mass: "passworn and confirm are not match" }),
         { status: 501 }
       );
-  }else if(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(pass)){
+  }else if(!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(pass))){
     return new Response(
         JSON.stringify({ mass: "password should contain at least one numeric digit, one uppercase and one lowercase letter" }),
         { status: 501 }

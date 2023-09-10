@@ -1,22 +1,23 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { signIn } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Page() {
   const { id, title, price, image } = JSON.parse(
     sessionStorage.getItem("course")
   );
-  const [discount, setDiscount] = React.useState(0);
-  let uid=useRef();
+  const [discount, setDiscount] = useState(0);
+  const [uid,setUid]=useState(null)
+  const router=useRouter()
 
   useEffect(() => {
     async function islogin() {
       const session = await fetch("/api/auth/session").then((res) =>
         res.json()
       );
-      !session.user && signIn(undefined, { callbackUrl: "/checkout" });
-      uid.current= await session.user.id;
+       session.user?setUid(await session.user?.id):router.push("/login");
+      
     }
     islogin();
   }, []);
@@ -38,11 +39,15 @@ export default function Page() {
     const res=await fetch('/api/enrollments',{
       method:"POST",
       body:JSON.stringify({
-        usersId:uid.current,
+        usersId:uid,
         coursesId:id,
+        price:price-discount,
+        paymentMethod:"bkash",
+        trxId:"lsdfjljsd"
       })
     })
-    alert(res.status===201?"enroll success":"enroll failed")
+    alert(res.status===201?"enroll success":"enroll failed");
+    res.status===201?router.push("/dashbord"):null;
   }
 
   return (
@@ -92,9 +97,9 @@ export default function Page() {
           Select Payment Method
         </h1>
         <div className="flex justify-center">
-          <button onClick={enroll} className="px-10 py-2 bg-orange-500 text-white rounded-md font-bold text-lg">
+          {uid?<button onClick={enroll} className="px-10 py-2 bg-orange-500 text-white rounded-md font-bold text-lg">
             Pay Now
-          </button>
+          </button>:null}
         </div>
       </div>
     </section>

@@ -9,7 +9,13 @@ export default function Page() {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const data = await fetch("/api/blogs");
+      const data = await fetch("/api/blogs",{
+        method: "POST",
+        body: JSON.stringify({
+          take:5,
+          skip:0
+        }),
+      });
       setBlogs(await data.json());
     };
     fetchBlogs();
@@ -59,14 +65,9 @@ export default function Page() {
           </Link>
         </div>
       ))}
-      {/* <div className="w-full flex justify-between items-center my-6">
-        <p className="font-medium">Page <span>2</span> of <span>2</span></p>
-        <div className="flex">
-          <span className={pclass}><UilAngleLeft size="20" /></span>
-          <span className={pclass}>1</span>
-          <span className={pclass}>2</span>
-          <span className={pclass}><UilAngleRight size="20" /></span>
-        </div>
+      {/* <div className="mb-10 animate-pulse -z-20 relative">
+        <div className="w-full h-96 bg-slate-200 rounded-xl"></div>
+
       </div> */}
     </div>
   );

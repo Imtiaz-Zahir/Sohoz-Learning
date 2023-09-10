@@ -2,12 +2,15 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export async function POST(req){
-    const{usersId,coursesId}=await req.json();
+    const{usersId,coursesId,price,paymentMethod,trxId}=await req.json();
     try {
         await prisma.enrollments.create({
             data:{
                 usersId,
-                coursesId
+                coursesId,
+                price,
+                paymentMethod,
+                trxId
             }
         })
         return new Response(JSON.stringify({msg:'success'}),{status:201})

@@ -37,7 +37,7 @@ model courses {
   image          String
   price          Int
   title          String
-  video          String
+  video          String?
   about          String
   lavel          String
   createdAt      DateTime         @default(now())
@@ -81,31 +81,31 @@ model lessons {
 }
 
 model enrollments {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   price         Int
   paymentMethod String
   trxId         String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  coures        courses  @relation(fields: [coursesId], references: [id])
-  user          users    @relation(fields: [usersId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  coures        courses   @relation(fields: [coursesId], references: [id])
+  user          users     @relation(fields: [usersId], references: [id])
   usersId       String
   coursesId     String
-  reviews       reviews  @relation(fields: [reviewsId], references: [id])
-  reviewsId     String
+  reviews       reviews[]
 }
 
 model reviews {
-  id          String        @id @default(uuid())
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  rating      Int
-  comment     String
-  user        users         @relation(fields: [usersId], references: [id])
-  usersId     String
-  coures      courses       @relation(fields: [coursesId], references: [id])
-  coursesId   String
-  enrollments enrollments[]
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  rating        Int
+  comment       String
+  user          users       @relation(fields: [usersId], references: [id])
+  usersId       String
+  coures        courses     @relation(fields: [coursesId], references: [id])
+  coursesId     String
+  for           enrollments @relation(fields: [enrollmentsId], references: [id])
+  enrollmentsId String
 }
 
 model contacts {

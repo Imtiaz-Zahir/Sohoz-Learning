@@ -68,7 +68,7 @@ function FaqItem(data, index) {
           className={`cursor-pointer ${open?'rotate-180':null}`}
         />
       </div>
-      {open?<p className="text-lg mt-6">{data.answer}</p>:null}
+      <p className={`text-lg mt-6 ${open?null:'hidden'}`}>{data.answer}</p>
     </div>
   );
 }

@@ -1,109 +1,45 @@
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 
-export default function course() {
-  async function addcourse(e) {
-   e.preventDefault();
-    const data = {
-      price: parseInt(e.target.price.value),
-      image: e.target.image.value,
-      title: e.target.title.value,
-      about: e.target.about.value,
-      lavel: e.target.lavel.value,
-      learningPoient: [
-        { point: e.target.learningPoient1.value },
-        { point: e.target.learningPoient2.value },
-        { point: e.target.learningPoient3.value },
-        { point: e.target.learningPoient4.value },
-        { point: e.target.learningPoient5.value },
-        { point: e.target.learningPoient6.value }
-      ]
-    }
-    const res = await fetch('/api/courses', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    })
-    alert(res.status===201?"Course Added":"Course Not Added")
-    res.status===201?e.target.reset():null
-  }
+export default async function course() {
+  const courses = await fetch("/api/admin/courses").then((res) => res.json());
 
   return (
     <div className="lg:p-6 lg:w-[80%] border-t border-slate-300">
-      <h1 className="text-2xl font-bold">Post Courses</h1>
-      <form onSubmit={addcourse} className="flex flex-col gap-4">
-        <input
-          type="text"
-          name="image"
-          placeholder="image"
-          className="border-2 border-slate-500 focus:outline-none" required
-        />
-        <input
-          type="text"
-          name="title"
-          placeholder="title"
-          className="border-2 border-slate-500 focus:outline-none" required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="price"
-          className="border-2 border-slate-500 focus:outline-none" required
-        />
-        <select
-          name="lavel"
-          className="border-2 border-slate-500 focus:outline-none" required
-        >
-          <option value="All">All</option>
-          <option value="Biganer">Biganer</option>
-          <option value="Advance">Advance</option>
-        </select>
-        <textarea
-          name="about"
-          id=""
-          cols="30"
-          rows="10"
-          placeholder="about"
-          className="border-2 border-slate-500 focus:outline-none" required
-        ></textarea>
-        <div className="grid grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="learningPoient1"
-            placeholder="learningPoient1"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <input
-            type="text"
-            name="learningPoient2"
-            placeholder="learningPoient2"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <input
-            type="text"
-            name="learningPoient3"
-            placeholder="learningPoient3"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <input
-            type="text"
-            name="learningPoient4"
-            placeholder="learningPoient4"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <input
-            type="text"
-            name="learningPoient5"
-            placeholder="learningPoient5"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <input
-            type="text"
-            name="learningPoient6"
-            placeholder="learningPoient6"
-            className="border-2 border-slate-500 focus:outline-none" required
-          />
-          <button type="submit">submit</button>
-        </div>
-      </form>
+      <Link
+        href={`/admin/addCourse`}
+        className="bg-orange-500 rounded-lg text-lg font-semibold mt-4 py-2 flex items-center justify-center text-white"
+      >
+        Add Course
+      </Link>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
+        {courses.map((data) => (
+          <div
+            key={data.id}
+            className="p-4 bg-cyan-50 rounded-xl max-w-[350px] mx-auto my-5"
+          >
+            <Image
+              className="w-full rounded-xl"
+              src={`/course/${data.image}`}
+              alt={data.title}
+              height={300}
+              width={350}
+            />
+            <div className="px-4 mt-4">
+              <p className="text-2xl hover:text-orange-500 transition-all font-bold text-center">
+                {data.title}
+              </p>
+              <Link
+                href={`/admin/${data.id}`}
+                className="border border-orange-500 rounded-lg text-lg font-semibold mt-4 flex items-center justify-center text-orange-500 py-2 hover:bg-orange-500 hover:text-white"
+              >
+                Edit Course
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
