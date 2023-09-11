@@ -2,14 +2,15 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export async function POST(req){
-    const{rating,comment,usersId,coursesId}=await req.json();
+    const{rating,comment,usersId,coursesId,enrollmentsId}=await req.json();
     try {
         await prisma.reviews.create({
             data:{
                 rating,
                 comment,
                 usersId,
-                coursesId
+                coursesId,
+                enrollmentsId
             }
         })
         return new Response('success',{status:201})

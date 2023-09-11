@@ -7,6 +7,11 @@ export async function middleware(request) {
     req: request,
     secret: process.env.NEXTAUTH_SECRE,
   });
+  if (request.nextUrl.pathname.startsWith("/admin")||request.nextUrl.pathname.startsWith("/api/admin")) {
+    if(token.email!=='1@2.3'){
+      return NextResponse.redirect(new URL("/", request.url))
+    }
+  }
   if (request.nextUrl.pathname.startsWith("/videos")) {
     if (!token){
       return NextResponse.redirect(new URL("/", request.url))
