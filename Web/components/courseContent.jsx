@@ -36,7 +36,7 @@ export default function CourseContent({contant, key, setUrl}) {
                 <span>{lesson.title}</span>
               </p>
               <p className="flex justify-center items-center gap-2">
-                <span>{lesson.duration}</span> <UilPadlock />
+                <span>{lesson.duration} Minutes</span> <UilPadlock />
               </p>
             </div>
           );

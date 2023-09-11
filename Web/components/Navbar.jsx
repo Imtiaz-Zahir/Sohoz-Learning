@@ -57,7 +57,7 @@ export default function Navbar({session}) {
   
 
   return (
-    <nav id="nav" className="flex w-full transition-all px-0 py-0 xs:py-1 sm:py-2 md:py-3 justify-between items-center fixed xs:px-2 sm:px-4 md:px-8 lg:px-12 xl:px-20">
+    <nav id="nav" className='flex w-full transition-all px-0 py-0 xs:py-1 sm:py-2 md:py-3 justify-between items-center fixed xs:px-2 sm:px-4 md:px-8 lg:px-12 xl:px-20 z-50'>
       <Link href="/"><Image priority={true} width={200} height={40} className='h-10' src="/logo.png" alt="Sohoz Leaning" /></Link>
       <div className="flex">
         <div className="lg:hidden my-2 md:my-1 flex gap-2">

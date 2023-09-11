@@ -4,9 +4,9 @@ import { UilAngleRight, UilAngleLeft } from '@iconscout/react-unicons'
 import { PrismaClient } from '@prisma/client'
 
 export default async function Page() {
-  const prisma = new PrismaClient();
-  const courses = await prisma.courses.findMany({
-    take:5,
+const prisma = new PrismaClient();
+  const res = await prisma.courses.findMany({
+    take:6,
     select:{
       id:true,
       title:true,
@@ -21,10 +21,36 @@ export default async function Page() {
         select:{
           id:true
         }
+      },
+      couresContent:{
+        select:{
+          lessons:{
+            select:{
+              duration:true
+            }
+          }
+        }
       }
     }
   })
   await prisma.$disconnect();
+
+  const courses = res.reduce((acc, crr) => {
+    const courserLength = crr.couresContent.reduce((acc, crr) => {
+      return acc + crr.lessons.duration
+    },0)
+    const length=Math.floor(courserLength/60)+"h "+courserLength%60
+    const res ={
+      id: crr.id,
+    title: crr.title,
+    price: crr.price,
+    image: crr.image,
+    reviews: crr.reviews,
+    enrollments: crr.enrollments,
+    courserLength:length
+    }
+    return [...acc,res]
+  },[])
 
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-20">

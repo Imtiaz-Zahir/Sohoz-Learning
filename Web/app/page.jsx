@@ -14,7 +14,7 @@ import { PrismaClient } from '@prisma/client'
 
 export default async function Home() {
   const prisma = new PrismaClient();
-  const courses = await prisma.courses.findMany({
+  const res = await prisma.courses.findMany({
     take:6,
     select:{
       id:true,
@@ -30,10 +30,37 @@ export default async function Home() {
         select:{
           id:true
         }
+      },
+      couresContent:{
+        select:{
+          lessons:{
+            select:{
+              duration:true
+            }
+          }
+        }
       }
     }
   })
   await prisma.$disconnect();
+
+  const courses = res.reduce((acc, crr) => {
+    const courserLength = crr.couresContent.reduce((acc, crr) => {
+      return acc + crr.lessons.duration
+    },0)
+    const length=Math.floor(courserLength/60)+"h "+courserLength%60
+
+    const res ={
+      id: crr.id,
+    title: crr.title,
+    price: crr.price,
+    image: crr.image,
+    reviews: crr.reviews,
+    enrollments: crr.enrollments,
+    courserLength:length
+    }
+    return [...acc,res]
+  },[])
 
   return (
     <>
@@ -122,7 +149,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-20 my-20">
+      <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-20 py-20">
         <div className="flex justify-center items-center flex-col mb-10 text-center">
           <p className="text-orange-600 font-medium mb-3">COURSES</p>
           <h2 className="text-2xl font-bold">Explore Popular Courses</h2>

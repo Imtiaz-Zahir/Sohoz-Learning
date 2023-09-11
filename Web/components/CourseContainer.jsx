@@ -65,7 +65,7 @@ export default function CourseContainerHome({ data, key }) {
         <div className="flex items-center justify-between text-slate-600 mb-2">
           <span className="flex items-center gap-1">
             <UilClockThree size="20" />
-            {data.duration}
+            {data.courserLength}
           </span>
           <p className="text-slate-600 font-medium flex gap-1 items-center">
             <UilUser size="18" />

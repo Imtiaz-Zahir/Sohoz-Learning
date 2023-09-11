@@ -27,6 +27,7 @@ export async function POST(req) {
             },
             select:{
                 title:true,
+                image:true,
                 couresContent:{
                     orderBy:{
                         orderOn:"asc"
