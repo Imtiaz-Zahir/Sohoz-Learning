@@ -78,7 +78,7 @@ export default async function Home() {
           </p>
         </div>
         <div className="w-2/4 px-4 hidden lg:block">
-          <Image priority={true} width={500} height={700} className="w-full" src="/single-instructor-1.png" alt="" />
+          <Image priority={true} width={564} height={800} className="w-full" src="/single-instructor-1.png" alt="" />
         </div>
       </section>
       <section className="w-full px-0 xs:px-2 sm:px-6 lg:px-14 xl:px-20 my-20 grid grid-cols-1 gap-6 lg:grid-cols-3">

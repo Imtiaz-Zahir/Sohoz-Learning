@@ -1,9 +1,17 @@
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default async function blog() {
-  const blogs = await fetch("/api/admin/blogs").then((res) => res.json());
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    (async function () {
+      await fetch("/api/admin/blogs")
+        .then((res) => res.json())
+        .then((data) => setBlogs(data));
+    })();
+  }, []);
 
   return (
     <div className="lg:p-6 lg:w-[80%] border-t border-slate-300">
@@ -21,7 +29,7 @@ export default async function blog() {
           >
             <Image
               className="w-full rounded-xl"
-              src={`/course/${data.image}`}
+              src={`/blog/${data.image}`}
               alt={data.title}
               height={300}
               width={350}
@@ -41,5 +49,5 @@ export default async function blog() {
         ))}
       </div>
     </div>
-  )
+  );
 }

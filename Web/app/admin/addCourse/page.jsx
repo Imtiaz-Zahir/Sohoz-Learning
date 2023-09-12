@@ -1,31 +1,21 @@
 'use client'
-import React from "react";
+import React, { useState } from "react";
 
-export default function page() {
+export default function Page() {
+  const[submit,setSubmit] = useState('submit')
+  const[disable,setDisable] = useState(false)
   async function addcourse(e) {
     e.preventDefault();
-    const data = {
-      price: parseInt(e.target.price.value),
-      image: e.target.image.value,
-      video: e.target.video.value,
-      title: e.target.title.value,
-      about: e.target.about.value,
-      lavel: e.target.lavel.value,
-      learningPoient: [
-        { point: e.target.learningPoient1.value },
-        { point: e.target.learningPoient2.value },
-        { point: e.target.learningPoient3.value },
-        { point: e.target.learningPoient4.value },
-        { point: e.target.learningPoient5.value },
-        { point: e.target.learningPoient6.value },
-      ],
-    };
+    setDisable(true)
+    setSubmit('submiting...')
     const res = await fetch("/api/admin/courses", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: new FormData(e.target),
     });
     alert(res.status === 201 ? "Course Added" : "Course Not Added");
     res.status === 201 ? e.target.reset() : null;
+    setSubmit('submit')
+    setDisable(false)
   }
 
   return (
@@ -34,7 +24,7 @@ export default function page() {
       <h1 className="text-2xl font-bold my-5">Post Courses</h1>
       <form onSubmit={addcourse} className="flex flex-col gap-4">
         <input
-          type="text"
+          type="file"
           name="image"
           placeholder="image"
           className="border-2 border-slate-500 focus:outline-none"
@@ -121,7 +111,7 @@ export default function page() {
             className="border-2 border-slate-500 focus:outline-none"
             required
           />
-          <button className="bg-orange-500 text-white col-span-2 focus:outline-none" type="submit">submit</button>
+          <button className="bg-orange-500 text-white col-span-2 focus:outline-none" type="submit" disabled={disable}>{submit}</button>
         </div>
       </form>
       </div>

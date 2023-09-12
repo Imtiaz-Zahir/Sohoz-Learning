@@ -60,7 +60,7 @@ export default async function Footer() {
           {blog?<div className="flex items-center my-2">
             <Image
               className="h-20 w-24 rounded-md"
-              height={80}
+              height={48}
               width={96}
               src={`/blog/${blog.image}`}
               alt={blog.title}

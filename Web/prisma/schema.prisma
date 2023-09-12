@@ -25,11 +25,22 @@ model blogs {
   id        String   @id @default(uuid())
   image     String
   author    String
+  views     Int     @default(0)
   title     String
   content   String
-  views     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  viewed    viewed[]
+}
+
+model viewed {
+  id        String   @id @default(uuid())
+  ip        String
+  viewed    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  for       blogs    @relation(fields: [blogsId], references: [id])
+  blogsId   String
 }
 
 model courses {

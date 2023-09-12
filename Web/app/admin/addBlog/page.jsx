@@ -1,32 +1,30 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function page() {
-    async function addBlog(e) {
-        e.preventDefault();
-        await fetch("/api/admin/blogs",{
-            method:"POST",
-            body:JSON.stringify({
-                image:e.target.image.value,
-                title:e.target.title.value,
-                content:e.target.content.value
-            })
-        }).then(res=>{
-            if(res.status===201){
-                alert("Blog Added")
-                e.target.reset()
-            }else{
-                alert("Blog Not Added")
-            }
-        })
-    }
+export default function Page() {
+  const[submit,setSubmit] = useState('submit')
+  const[disable,setDisable] = useState(false)
+  async function addBlog(e) {
+    e.preventDefault();
+    setDisable(true)
+    setSubmit('submiting...')
+    const res = await fetch("/api/admin/blogs", {
+      method: "POST",
+      body: new FormData(e.target),
+    });
+    alert(res.status === 201 ? "Blog Added" : "Blog Not Added");
+    res.status === 201 ? e.target.reset() : null;
+    setSubmit('submit')
+    setDisable(false)
+  }
+
   return (
     <section className="px-0 xs:px-2 sm:px-6 lg:px-20 py-28 grid grid-cols-2">
       <div>
       <h1 className="text-2xl font-bold my-5">Post Blog</h1>
       <form onSubmit={addBlog} className="flex flex-col gap-4">
         <input
-          type="text"
+          type="file"
           name="image"
           placeholder="image"
           className="border-2 border-slate-500 focus:outline-none"
@@ -41,7 +39,6 @@ export default function page() {
         />
         <textarea
           name="content"
-          id=""
           cols="30"
           rows="10"
           placeholder="content"
@@ -49,7 +46,7 @@ export default function page() {
           required
         ></textarea>
         
-        <button className="bg-orange-500 text-white focus:outline-none" type="submit">submit</button>
+        <button className="bg-orange-500 text-white focus:outline-none" type="submit" disabled={disable}>{submit}</button>
       </form>
       </div>
     </section>

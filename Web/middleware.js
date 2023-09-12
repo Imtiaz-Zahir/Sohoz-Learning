@@ -8,7 +8,9 @@ export async function middleware(request) {
     secret: process.env.NEXTAUTH_SECRE,
   });
   if (request.nextUrl.pathname.startsWith("/admin")||request.nextUrl.pathname.startsWith("/api/admin")) {
-    if(token.email!=='1@2.3'){
+    if(token?.email==='1@2.3'){
+      null
+    }else{
       return NextResponse.redirect(new URL("/", request.url))
     }
   }
@@ -21,7 +23,7 @@ export async function middleware(request) {
       }
     }
   }
-  if (request.nextUrl.pathname.startsWith("/dashbord")) {
+  if (request.nextUrl.pathname.startsWith("/dashbord")||request.nextUrl.pathname.startsWith("/api/dashbord")) {
     if (!token) return NextResponse.redirect(new URL("/", request.url));
   }
   if (
