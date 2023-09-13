@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default async function blog() {
+export default async function Blog() {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
-    (async function () {
-      await fetch("/api/admin/blogs")
-        .then((res) => res.json())
-        .then((data) => setBlogs(data));
-    })();
+    fetch("/api/admin/blogs")
+      .then((res) => res.json())
+      .then((data) => setBlogs(data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

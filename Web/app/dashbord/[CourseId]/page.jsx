@@ -14,18 +14,15 @@ export default function Page({ params }) {
   });
 
   useEffect(() => {
-    async function getData() {
-      await fetch("/api/dashbord/course", {
-        method: "POST",
-        body: JSON.stringify({ CourseId: params.CourseId }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setCourseContent(data);
-          setUrl(data.couresContent[0].lessons[0].video);
-        });
-    }
-    getData();
+    fetch("/api/dashbord/course", {
+      method: "POST",
+      body: JSON.stringify({ CourseId: params.CourseId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCourseContent(data);
+        setUrl(data.couresContent[0].lessons[0].video);
+      });
   }, []);
 
   const totleLesson = _courseContent.couresContent.reduce((acc, crr) => {
@@ -212,8 +209,13 @@ export default function Page({ params }) {
           </div>
         </div> */}
         <div className="lg:w-2/3 mt-10 lg:mt-0">
-          {url && <Player src={`/videos/${url}`} poster={`/course/${_courseContent.image}`}/>}
-          
+          {url && (
+            <Player
+              src={`/videos/${url}`}
+              poster={`/course/${_courseContent.image}`}
+            />
+          )}
+
           {/* <video src="/videos/test.mp4" className="h-[450px] mx-auto" poster="/course/course-9.jpg" height={450} controls ></video> */}
           {/* <iframe
             className='rounded-2xl w-full bg-gray-300'

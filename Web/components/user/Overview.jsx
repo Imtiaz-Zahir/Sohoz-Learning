@@ -12,12 +12,27 @@ export default async function Overview() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    (async function () {
-      await fetch("/api/dashbord")
-        .then((res) => res.json())
-        .then((data) => setCourses(data));
-    })();
+    fetch("/api/dashbord")
+      .then((res) => res.json())
+      .then((data) => setCourses(data))
+      .catch((err) => console.log(err));
   }, []);
+
+  // API response e.g.
+  // [
+  //   {
+  //     id: String,
+  //     image: String,
+  //     title: String,
+  //     lessons: Int,
+  //   },
+  //   {
+  //     id: String,
+  //     image: String,
+  //     title: String,
+  //     lessons: Int,
+  //   },
+  // ];
 
   return (
     <div className="py-6 lg:p-6 lg:w-[80%] w-full">

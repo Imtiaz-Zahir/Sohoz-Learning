@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default async function course() {
+export default async function Course() {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
-    (async function () {
-      await fetch("/api/admin/courses")
-        .then((res) => res.json())
-        .then((data) => setCourses(data));
-    })();
+    fetch("/api/admin/courses")
+      .then((res) => res.json())
+      .then((data) => setCourses(data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

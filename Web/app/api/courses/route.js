@@ -5,7 +5,7 @@ export async function GET(req){
     // const{author,image,title,content}=await req.json();
     try {
         const res=await prisma.courses.findMany({
-            take:5,
+            take:6,
             skip:0,
         })
         return new Response(JSON.stringify(res),{status:201})

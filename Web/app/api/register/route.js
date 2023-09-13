@@ -18,10 +18,10 @@ export async function POST(req) {
         JSON.stringify({ mass: "alrady ragister" }),
         { status: 501 }
       );
-  }else if(pass.length < 8){
+  }else if(pass.length < 8 || pass.length > 16){
     return new Response(
           JSON.stringify(
-            { mass: "password must be more then 8 character" },
+            { mass: "password must be 8 to 16 character" },
             { status: 501 }
           )
         );

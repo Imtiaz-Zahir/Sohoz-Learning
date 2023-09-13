@@ -15,7 +15,7 @@ import { PrismaClient } from '@prisma/client'
 export default async function Home() {
   const prisma = new PrismaClient();
   const res = await prisma.courses.findMany({
-    take:6,
+    take:9,
     select:{
       id:true,
       title:true,

@@ -8,19 +8,18 @@ export default function Page() {
     sessionStorage.getItem("course")
   );
   const [discount, setDiscount] = useState(0);
-  const [uid,setUid]=useState(null)
-  const router=useRouter()
+  const [uid, setUid] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    async function islogin() {
-      const session = await fetch("/api/auth/session").then((res) =>
-        res.json()
-      );
-       session.user?setUid(await session.user?.id):router.push("/login");
-      
-    }
-    islogin();
+    fetch("/api/auth/session")
+      .then((res) => res.json())
+      .then((session) => {
+        session.user ? setUid(session.user?.id) : router.push("/login");
+      })
+      .catch((err) => console.log(err));
   }, []);
+  
   function cupon(e) {
     e.preventDefault();
     const cupon = e.target[0].value;
@@ -36,18 +35,18 @@ export default function Page() {
     // })
   }
   async function enroll() {
-    const res=await fetch('/api/enrollments',{
-      method:"POST",
-      body:JSON.stringify({
-        usersId:uid,
-        coursesId:id,
-        price:price-discount,
-        paymentMethod:"bkash",
-        trxId:"lsdfjljsd"
-      })
-    })
-    alert(res.status===201?"enroll success":"enroll failed");
-    res.status===201?router.push("/dashbord"):null;
+    const res = await fetch("/api/enrollments", {
+      method: "POST",
+      body: JSON.stringify({
+        usersId: uid,
+        coursesId: id,
+        price: price - discount,
+        paymentMethod: "bkash",
+        trxId: "lsdfjljsd",
+      }),
+    });
+    alert(res.status === 201 ? "enroll success" : "enroll failed");
+    res.status === 201 ? router.push("/dashbord") : null;
   }
 
   return (
@@ -97,9 +96,14 @@ export default function Page() {
           Select Payment Method
         </h1>
         <div className="flex justify-center">
-          {uid?<button onClick={enroll} className="px-10 py-2 bg-orange-500 text-white rounded-md font-bold text-lg">
-            Pay Now
-          </button>:null}
+          {uid ? (
+            <button
+              onClick={enroll}
+              className="px-10 py-2 bg-orange-500 text-white rounded-md font-bold text-lg"
+            >
+              Pay Now
+            </button>
+          ) : null}
         </div>
       </div>
     </section>

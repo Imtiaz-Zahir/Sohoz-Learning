@@ -36,7 +36,7 @@ export const authOptions = {
 
         const prisma = new PrismaClient();
         try {
-          const user = await prisma.users.findUnique({
+          if(credentials.password.length<17){const user = await prisma.users.findUnique({
             where: {
               email:credentials.username,
               password:await SHA256(credentials.password).toString()
@@ -47,7 +47,7 @@ export const authOptions = {
               email:true
             }
           })
-          return user
+          return user}else{return null}
         } catch (error) {
           console.log(error);
           return null

@@ -66,10 +66,10 @@ export async function POST(req) {
   });
   if (token && token.exp > Date.now() / 1000) {
     const { prvPass, newPass, conNewPass } = await req.json();
-    if(newPass.length < 8){
+    if(newPass.length < 8 || newPass.length > 16){
       return new Response(
             JSON.stringify(
-              { mass: "password must be more then 8 character" },
+              { mass: "password must be 8 to 16 character" },
               { status: 501 }
             )
           );

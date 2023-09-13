@@ -15,19 +15,18 @@ export default function Page() {
   const [loadmore, setLoadmore] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      await fetch("/api/blogs", {
-        method: "POST",
-        body: JSON.stringify({
-          skip: blogs.length,
-        }),
+    fetch("/api/blogs", {
+      method: "POST",
+      body: JSON.stringify({
+        skip: blogs.length,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoadmore(data.length === 5);
+        setBlogs((prev) => [...data, ...prev]);
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setLoadmore(data.length === 5);
-          setBlogs((prev) => [...data, ...prev]);
-        });
-    })();
+      .catch((err) => console.log(err));
   }, []);
 
   return (
