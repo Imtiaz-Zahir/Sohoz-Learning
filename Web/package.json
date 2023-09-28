@@ -11,7 +11,7 @@
   "dependencies": {
     "@iconscout/react-unicons": "^2.0.2",
     "@iconscout/react-unicons-solid": "^1.0.2",
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.3.1",
     "@types/react": "^18.2.21",
     "@vidstack/player": "^1.6.5",
     "@vidstack/player-react": "^1.6.5",
@@ -19,6 +19,7 @@
     "crypto-js": "^4.1.1",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "html-react-parser": "^4.2.2",
     "next": "13.4.4",
     "next-auth": "^4.22.3",
     "postcss": "8.4.23",

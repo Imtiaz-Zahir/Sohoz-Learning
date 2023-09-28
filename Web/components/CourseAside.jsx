@@ -15,11 +15,11 @@ export default function CourseAside({ course }) {
   return (
     <aside className="lg:w-2/5 max-w-[320px] ml-auto">
       <div className="rounded-xl overflow-hidden w-full shadow-xl">
-        {course.video && <iframe
+        {/* {course.video && <iframe
           className="w-full"
           src={course.video}
           frameborder="0"
-        ></iframe>}
+        ></iframe>} */}
         <div className="p-4">
           <p className="text-3xl my-2 font-bold">৳ {course.price}</p>
           <h4

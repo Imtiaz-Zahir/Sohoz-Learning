@@ -17,6 +17,7 @@ export default async function Overview() {
       .then((data) => setCourses(data))
       .catch((err) => console.log(err));
   }, []);
+  console.log(courses)
 
   // API response e.g.
   // [

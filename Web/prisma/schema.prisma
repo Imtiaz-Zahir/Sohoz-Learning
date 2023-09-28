@@ -25,9 +25,9 @@ model blogs {
   id        String   @id @default(uuid())
   image     String
   author    String
-  views     Int     @default(0)
+  views     Int      @default(0)
   title     String
-  content   String
+  content   String   @db.LongText
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   viewed    viewed[]
@@ -49,7 +49,7 @@ model courses {
   price          Int
   title          String
   video          String?
-  about          String
+  about          String           @db.LongText
   lavel          String
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt

@@ -16,7 +16,7 @@ CREATE TABLE `blogs` (
     `id` VARCHAR(191) NOT NULL,
     `image` VARCHAR(191) NOT NULL,
     `author` VARCHAR(191) NOT NULL,
-    `views` INTEGER NOT NULL,
+    `views` INTEGER NOT NULL DEFAULT 0,
     `title` VARCHAR(191) NOT NULL,
     `content` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),

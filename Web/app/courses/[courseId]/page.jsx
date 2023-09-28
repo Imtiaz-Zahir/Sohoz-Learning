@@ -1,6 +1,7 @@
 import React from "react";
 import CourseAside from "@/components/CourseAside";
 import { PrismaClient } from "@prisma/client";
+import parse from "html-react-parser";
 
 export default async function Page({ params }) {
   const prisma = new PrismaClient();
@@ -41,7 +42,7 @@ export default async function Page({ params }) {
         <h1 className="text-3xl font-bold my-4">{course.title}</h1>
         <hr />
         <h2 className="my-4 text-lg font-bold mx-1">About Course</h2>
-        <div className="pl-4">{course.about}</div>
+        <div className="pl-4">{parse(course.about)}</div>
         <h3 className="my-4 text-lg font-bold mx-1">What Will You Learn?</h3>
         <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-x-10 list-disc text-lg ml-8">
           {course.learningPoient.map((data,index) => (

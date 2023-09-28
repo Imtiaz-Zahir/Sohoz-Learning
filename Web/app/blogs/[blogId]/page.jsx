@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { PrismaClient } from '@prisma/client'
 import { UilUser, UilCalendarAlt, UilEye } from '@iconscout/react-unicons'
+import parse from "html-react-parser";
 
 export default async function Page({ params }) {
     const prisma = new PrismaClient()
@@ -21,7 +22,7 @@ export default async function Page({ params }) {
                 </div>
             </div>
             <h1 className="text-3xl font-bold">{blog.title}</h1>
-            <p className="my-6 text-slate-500">{blog.content}</p>
+            <p className="my-6 text-slate-500">{parse(blog.content)}</p>
         </div>
     )
 }
