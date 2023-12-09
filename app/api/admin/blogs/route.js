@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 import { writeFile } from "fs";
 import { join } from "path";
 import { getToken } from "next-auth/jwt";
+import { Buffer } from "buffer";
 
 export async function GET(req) {
   try {

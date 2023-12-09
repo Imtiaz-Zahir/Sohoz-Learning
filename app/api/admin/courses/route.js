@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { writeFile } from "fs";
 import { join } from "path";
+import { Buffer } from "buffer";
 const prisma = new PrismaClient();
 
 export async function GET(req) {

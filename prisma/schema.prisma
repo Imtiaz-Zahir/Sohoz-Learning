@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model users {
@@ -27,7 +28,7 @@ model blogs {
   author    String
   views     Int      @default(0)
   title     String
-  content   String   @db.LongText
+  content   String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   viewed    viewed[]
@@ -49,7 +50,7 @@ model courses {
   price          Int
   title          String
   video          String?
-  about          String           @db.LongText
+  about          String           
   lavel          String
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
