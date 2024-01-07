@@ -38,8 +38,10 @@ export async function POST(req) {
       path + imageName,
       Buffer.from(await image.arrayBuffer()),
       (err) => {
-        err && console.log(err);
-        throw err;
+        if (err) {
+          console.log(err);
+          throw err;
+        }
       }
     );
 

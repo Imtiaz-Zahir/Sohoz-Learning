@@ -28,13 +28,22 @@ export async function POST(req) {
 
     let learningPoient = [];
     for (let index = 1; index < 7; index++) {
-      learningPoient.push({point:data.get(`learningPoient${index}`)});
+      learningPoient.push({ point: data.get(`learningPoient${index}`) });
     }
 
     const image = data.get("image");
     const imageName = new Date().getTime() + image.name;
     const path = join(process.cwd(), "public/course/");
-    await writeFile(path+imageName, Buffer.from(await image.arrayBuffer()) ,err=>{err && console.log(err); throw err});
+    await writeFile(
+      path + imageName,
+      Buffer.from(await image.arrayBuffer()),
+      (err) => {
+        if (err) {
+          console.log(err);
+          throw err;
+        }
+      }
+    );
 
     await prisma.courses.create({
       data: {
