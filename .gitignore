@@ -35,7 +35,7 @@ yarn-error.log*
 next-env.d.ts
 
 
-/public/blog/*
-/public/course/*
-/public/profile/*
-/public/webinar/*
+# /public/blog/*
+# /public/course/*
+# /public/profile/*
+# /public/webinar/*

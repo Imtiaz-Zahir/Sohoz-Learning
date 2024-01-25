@@ -1,6 +1,7 @@
 {
   "name": "sohoz-learning",
   "version": "0.1.0",
+  "author": "Imtiaz Zahir",
   "private": true,
   "scripts": {
     "dev": "next dev",
